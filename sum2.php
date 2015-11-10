@@ -1,7 +1,7 @@
 <?php
 $mail = $_GET["email"];
-$pass = $_POST['pw'];
-<h1>" cenas = "</h1>
+$pass = $_GET["pw"];
+echo " e-mail = $mail <br>";
 ?>
 
 <a href="site.html">Homepage</a>
