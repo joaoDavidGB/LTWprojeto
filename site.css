@@ -38,13 +38,14 @@ html, body {
 
 #menu{
 	background-color: #303030;
-	text-align: center;
 	padding-top:10px;
 	padding-bottom:10px;
+	text-align: center;
 }
 
 #menu ul{
 	margin: 0px;
+	padding-left: 0px;
 }
 
 #menu a{
@@ -61,14 +62,18 @@ html, body {
 	display: inline;
 }
 
+#FirstBoxes{
+	display: inline;
+}
+
 #login{
-	border: 5px solid black;
-	margin: 10px;
-	width: 250px;
+	border: 10px outset blue;
+	width: 270px;
+	float: left;
 }
 
 #procurar_eventos{
-	border: 5px solid red;
+	border: 10px outset red;
 	text-align: center;
 	width: 300px;
 	float: right
