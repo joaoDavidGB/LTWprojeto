@@ -14,15 +14,22 @@
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="registar.html">Resgister</a></li>
+				<li><a href="registar.html">Register</a></li>
 				<li><a href="criarEvento.html">Create event</a></li>
 			</ul>
-			<?php
-   				echo "<form id="loginForm" style="display: inline;" action="login.php">
-				Username/Password: <input type="text" name="username">
-				<input type="password" name="pw">
-				<input type="submit" value="Login">";
-			?>
+			<div id="loginMenu" style="display: inline;">
+				<?php
+					if(date("H") < 23){
+		   				echo'<form id="loginForm" style="display: inline;" action="login.php">
+						Username/Password: <input type="text" name="username">
+						<input type="password" name="pw">
+						<input type="submit" value="Login">';
+					}
+					else{
+						echo '<div id=loged>LogedIn</div>';
+					}
+				?>
+			</div>
 		</div>
 		<div id="FirstBoxes"> 
 			

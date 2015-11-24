@@ -3,6 +3,7 @@ html, body {
 	height:100%;
 	margin: 0;
 	padding: 0;
+	font-family: sans-serif;
 }
 
 #header{
@@ -19,7 +20,7 @@ html, body {
 }
 
 #header h1{
-	color: orange;
+	color: green;
 	font-family: serif;
 	font-size: 80px;
 	font-weight: 900;
@@ -38,13 +39,34 @@ html, body {
 
 #menu{
 	background-color: #303030;
+	padding-top:20px;
+	padding-bottom:20px;
 	text-align: center;
-	padding-top:10px;
-	padding-bottom:10px;
 }
 
 #menu ul{
 	margin: 0px;
+	padding-left: 0px;
+	display: inline;
+}
+
+#menu #loged{
+	display:inline;
+	color: red;
+	border: 2px solid blue;
+	font-size: 20px;
+	font-weight: 600;
+	background-color: white;
+	padding-bottom: 4px;
+}
+#menu #loginForm{
+	display:inline;
+	color: blue;
+	border: 2px solid grey;
+	font-size: 20px;
+	font-weight: 600;
+	background-color: white;
+	padding-bottom: 4px;
 }
 
 #menu a{
@@ -55,20 +77,21 @@ html, body {
 	font-size: 20px;
 	font-weight: 600;
 	border: 2px solid grey;
+	padding: 4px;
+	padding-top: 0px;
 }
 
 #menu li{
 	display: inline;
 }
 
-#login{
-	border: 5px solid black;
-	margin: 10px;
-	width: 250px;
+#FirstBoxes{
+	display: inline;
 }
 
+
 #procurar_eventos{
-	border: 5px solid red;
+	border: 10px outset grey;
 	text-align: center;
 	width: 300px;
 	float: right
