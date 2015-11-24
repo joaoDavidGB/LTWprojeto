@@ -61,12 +61,19 @@ html, body {
 	display: inline;
 }
 
+#login{
+	border: 5px solid black;
+	margin: 10px;
+	width: 250px;
+}
+
 #procurar_eventos{
 	border: 5px solid red;
 	text-align: center;
 	width: 300px;
 	float: right
 }
+
 #procurar_eventos h1{
 	color: brown;
 }
