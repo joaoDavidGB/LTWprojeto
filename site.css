@@ -50,7 +50,16 @@ html, body {
 	display: inline;
 }
 
-#menu form{
+#menu #loged{
+	display:inline;
+	color: red;
+	border: 2px solid blue;
+	font-size: 20px;
+	font-weight: 600;
+	background-color: white;
+	padding-bottom: 4px;
+}
+#menu #loginForm{
 	display:inline;
 	color: blue;
 	border: 2px solid grey;
