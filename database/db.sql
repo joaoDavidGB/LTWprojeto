@@ -3,14 +3,14 @@ DROP TABLE IF EXISTS events;
 
 CREATE TABLE users
 (
-id INTEGER AUTO_INCREMENT PRIMARY KEY,
+id INTEGER PRIMARY KEY,
 username VARCHAR UNIQUE,
 password VARCHAR NOT NULL
 );
 
 CREATE TABLE events
 (
-id INTEGER AUTO_INCREMENT PRIMARY KEY,
+id INTEGER  PRIMARY KEY,
 name VARCHAR UNIQUE,
 day INTEGER NOT NULL,
 month INTEGER NOT NULL,
@@ -18,8 +18,8 @@ year INTEGER NOT NULL,
 type VARCHAR NOT NULL
 );
 
-INSERT INTO users VALUES(NULL,'mieic', 'mieic13feup');
-INSERT INTO users VALUES(NULL,'Contador', 'Baiao');
-INSERT INTO users VALUES(NULL,'F0lha', 'Castro');
-INSERT INTO users VALUES(NULL,'revtut', 'mau');
+INSERT INTO users VALUES(1,'mieic', 'mieic13feup');
+INSERT INTO users VALUES(2,'Contador', 'Baiao');
+INSERT INTO users VALUES(3,'F0lha', 'Castro');
+INSERT INTO users VALUES(4,'revtut', 'mau');
 
