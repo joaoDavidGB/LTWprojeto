@@ -8,4 +8,4 @@ echo "Local: $local <br>" ;
 echo "Date: $data <br>" ;
 
 ?>
-<a href="site.html">Homepage</a>
+<a href="../site.php">Homepage</a>

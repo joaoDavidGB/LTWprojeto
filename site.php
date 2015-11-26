@@ -14,13 +14,13 @@
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="registar.php">Register</a></li>
-				<li><a href="criarEvento.html">Create event</a></li>
+				<li><a href="accounts/registar.php">Register</a></li>
+				<li><a href="events/criarEvento.html">Create event</a></li>
 			</ul>
 			<div id="loginMenu" style="display: inline;">
 				<?php
 					if(date("H") < 23){
-		   				echo'<form id="loginForm" style="display: inline;" action="printUsers.php">
+		   				echo'<form id="loginForm" method="post" style="display: inline;" action="accounts/login.php">
 						Username/Password: <input type="text" name="username">
 						<input type="password" name="pw">
 						<input type="submit" value="Login">';
@@ -35,7 +35,7 @@
 			
 			<div id="procurar_eventos">
 				<h1> Search Events </h1>
-				<form action="pesquisaEventos.php">
+				<form action="events/pesquisaEventos.php">
 				Name:<br><input type="text" name="nomeEvento"><br>
 				Local:<br><input type="text" name="local"><br>
 				Date:<br><input list="data" name="data">
