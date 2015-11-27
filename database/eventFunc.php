@@ -71,4 +71,15 @@ function deleteEvent($name){
 	}
 
 	return true;
+}
+
+function getAllEvents(){
+	global $db;
+
+
+	$stmt = $db->prepare('SELECT * FROM Event');
+	$stmt->execute();
+
+	return $stmt->fetchAll();
+}
 ?>
