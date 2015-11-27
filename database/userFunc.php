@@ -89,8 +89,9 @@ function deleteUser($username){
     return $stmt->fetchAll();
   }
 
-  function getUser($dbh, $username, $pw) {
+  function getUser($username, $pw) {
   	global $db;
+  	
   	$sql = "SELECT * FROM users WHERE username = :user AND password = :pw";
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':pw', $pw, PDO::PARAM_STR);
