@@ -71,29 +71,4 @@ function deleteEvent($name){
 	}
 
 	return true;
-}
-
-
-
-  function getEvent($name) {
-  	global $db;
-    $stmt = $dbh->prepare('SELECT * FROM Event WHERE name = :name');
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    try{
-    $stmt->execute();
-	}catch(PDOException $e){
-	return -1;
-	}
-    return $stmt->fetch();
- 	}
-
-function getAllEvents(){
-	global $db;
-
-
-	$stmt = $db->prepare('SELECT * FROM Event');
-	$stmt->execute();
-
-	return $stmt->fetchAll();
-}
 ?>

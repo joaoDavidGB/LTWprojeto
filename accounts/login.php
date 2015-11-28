@@ -14,9 +14,12 @@
 
   try {
     $user = getUser($dbh, $_POST['username'], $_POST["pw"]);
-    if ($user === false) die("No such user or invalid password");
-    var_dump($user);
-    echo '<a href="../site.php">Homepage</a>';
+    if ($user === false){
+      echo "login_false";
+    }
+    else{
+      echo "login_true";
+    }
   } catch (PDOException $e) {
     die($e->getMessage());
   }

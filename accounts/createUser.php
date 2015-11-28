@@ -20,6 +20,5 @@
     die($e->getMessage());
   }
   echo 'Username: '.$_POST['user'].' / pass: '.$_POST['pw'].'<br>';
-  echo '<a href="../site.php">Homepage</a>';
 
 ?>
