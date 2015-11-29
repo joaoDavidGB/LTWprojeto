@@ -16,8 +16,9 @@
     $stmt->bindParam(':username', $_POST['user'], PDO::PARAM_STR);
     $stmt->bindParam(':pw', $_POST['pw'], PDO::PARAM_STR);
     $stmt->execute();
+    echo 'register_true';
   } catch (PDOException $e) {
+    echo 'register_false';
     die($e->getMessage());
   }
-  echo 'Username: '.$_POST['user'].' / pass: '.$_POST['pw'].'<br>';
 ?>

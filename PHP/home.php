@@ -54,7 +54,7 @@
 			            var response = data;
 			            switch(response) {
 			                case 'login_false':
-			                    alert("Oops... Something went wrong!");
+			                    alert("Login failed!");
 			                    break;
 			                case 'login_true':
 			                    console.log("Logined in successfully");
@@ -95,14 +95,14 @@
 			        'pw' : password
 			        },
 			        function(data) {
-			            var response = data['login'];
-			            console.log(data);
+			            var response = data;
+			            
 			            switch(response) {
-			                case 'login_false':
-			                    alert("Oops... Something went wrong!");
+			                case 'register_false':
+			                    alert("Register failed");
 			                    break;
-			                case 'login_true':
-			                    alert("Logined in successfully");
+			                case 'register_true':
+			                    alert("Registered successfully");
 					    location.href='index.php?redirect=site';
 			                    break;
 			                default:
