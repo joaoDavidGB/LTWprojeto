@@ -4,7 +4,7 @@
   <head>
 	<meta charset="UTF-8">
 	<title>Events</title>
-	<link rel="stylesheet" href="home.css">
+	<link rel="stylesheet" href="CSS/home.css">
 	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
   </head>
@@ -29,6 +29,7 @@
 				</form>
 			</div>
 		</div>
+		
 		<script>
 			$("#loginForm").submit(function(ev){
 			    ev.preventDefault();
@@ -51,14 +52,13 @@
 			        },
 			        function(data) {
 			            var response = data;
-			            
 			            switch(response) {
 			                case 'login_false':
 			                    alert("Oops... Something went wrong!");
 			                    break;
 			                case 'login_true':
 			                    console.log("Logined in successfully");
-			                    location.href='site.php';
+			                    location.href='index.php?redirect=site';
 			                    break;
 			                default:
 			                	console.log("response: " + response);
@@ -84,7 +84,7 @@
 			    };
 
 			    if (password != password2){
-			    	alert("the passwords don't match!");
+			    	alert("The passwords do not match!");
 			    	return false;
 			    }
 
@@ -103,6 +103,7 @@
 			                    break;
 			                case 'login_true':
 			                    alert("Logined in successfully");
+					    location.href='index.php?redirect=site';
 			                    break;
 			                default:
 			                    //displayError("Error while processing the login...");

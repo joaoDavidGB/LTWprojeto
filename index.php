@@ -4,6 +4,17 @@
 if (!isset($_SESSION['username']))
 		$_SESSION['username'] = null;
 
-include("home.php");
+$redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'home';
 
+switch($redirect) {
+		case 'home':
+			include('PHP/home.php');
+			break;
+		case 'site':
+			include('PHP/site.php');
+			break;
+		default:
+			include('PHP/home.php');
+			break;
+	}
 ?>

@@ -4,7 +4,7 @@
   <head>
 	<meta charset="UTF-8">
 	<title>Events</title>
-	<link rel="stylesheet" href="site.css">
+	<link rel="stylesheet" href="CSS/site.css">
   </head>
 
 	<body bgcolor="white">
