@@ -4,7 +4,7 @@ include_once('connection.php');
 function createUser($username, $password){
 	global $db;
 
-	$stmt = $db->prepare('SELECT username FROM users WHERE username = :username');
+	$stmt = $db->prepare('SELECT username FROM User WHERE username = :username');
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 	$stmt->execute();
 
@@ -80,7 +80,7 @@ function deleteUser($username){
 
   function getAllUsers() {
   	global $db;
-    $stmt = $db->prepare('SELECT * FROM users');
+    $stmt = $db->prepare('SELECT * FROM User');
     try{
     $stmt->execute();
 	}catch(PDOException $e){
