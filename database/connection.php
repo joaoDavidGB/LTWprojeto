@@ -5,10 +5,10 @@
 		$path = 'database.db';
 	}
 	if (!(file_exists($path))) {
-		$path = 'events/database.db'
+		$path = 'events/database.db';
 	}
 	if (!(file_exists($path))) {
-		$path = 'accounts/database.db'
+		$path = 'accounts/database.db';
 	}
 	try{
 	  $db = new PDO('sqlite:' . $path);

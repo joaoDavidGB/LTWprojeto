@@ -19,6 +19,15 @@
 
 		 <div id="eventList">
 		 	<?
+		 		include('database/eventFunc.php');
+		 		$table = getAllEvents();
+		 		$max = sizeof($table);
+		 		echo 'tamanho da tabela de eventos: $max';
+		 		for($i = 0; $i < $max; $i++){
+		 			$line = getLine($table, $i);
+		 			$name = $line['name'];
+		 			echo '$name <br>';
+		 		}
 		 		echo "event1 <br><br><br><br><br><br><br>";
 		 		echo "event2 <br><br><br><br><br><br><br>";
 		 		echo "event3 <br><br><br><br><br><br><br>";
