@@ -71,7 +71,7 @@ function deleteUser($username){
 		$stmt->execute();
 	}
 
-	$stmt = db->prepare('DELETE FROM users WHERE username = :username');
+	$stmt = $db->prepare('DELETE FROM User WHERE username = :username');
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 	$stmt->execute();
 
@@ -91,8 +91,7 @@ function deleteUser($username){
 
   function getUser($dbh, $username, $pw) {
   	global $db;
-  	$sql = "SELECT * FROM users WHERE username = :user AND password = :pw";
-    $stmt = $dbh->prepare($sql);
+    $stmt = $dbh->prepare('SELECT * FROM User WHERE username = :user AND password = :pw');
     $stmt->bindParam(':pw', $pw, PDO::PARAM_STR);
     $stmt->bindParam(':user', $username, PDO::PARAM_STR);
     try{
@@ -103,5 +102,14 @@ function deleteUser($username){
     return $stmt->fetch();
  	}
   
-
+function existUser($dbh, $username) {
+  	global $db;
+    $stmt = $dbh->prepare('SELECT * FROM User WHERE username = :user');
+    $stmt->bindParam(':user', $username, PDO::PARAM_STR);
+    $result = $stmt->fetch();
+	if (!(count($result) === 0)) {
+		return false;
+	}
+	return true;
+}
 ?>
