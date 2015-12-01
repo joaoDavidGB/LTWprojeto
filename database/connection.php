@@ -11,13 +11,7 @@
 		$path = 'accounts/database.db';
 	}
 	if (!(file_exists($path))) {
-		$path = 'PHP/database.db';
-	}
-	if (!(file_exists($path))) {
-		$path = 'CSS/database.db';
-	}
-	if (!(file_exists($path))) {
-		$path = 'images/database.db';
+		$path = '../database/database.db';
 	}
 	try{
 	  $db = new PDO('sqlite:' . $path);

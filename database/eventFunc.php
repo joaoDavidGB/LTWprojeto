@@ -86,9 +86,9 @@ function getLine($table, $id){
 	return $table[$id];
 }
 
-function existEvent($dbh, $name) {
+function existEvent($name) {
   	global $db;
-    $stmt = $dbh->prepare('SELECT * FROM Event WHERE name = :name');
+    $stmt = $db->prepare('SELECT * FROM Event WHERE name = :name');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $result = $stmt->fetch();
 	if (!(count($result) === 0)) {
