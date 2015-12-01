@@ -24,7 +24,7 @@ html, body {
 }
 
 #eventList{
-	width: 60%; 
+	width: 40%; 
 	height: 90%; 
 	overflow-y: scroll;
 	border-right: 1px outset white;
