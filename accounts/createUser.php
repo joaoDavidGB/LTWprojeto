@@ -13,6 +13,7 @@
 
   try {
     $stmt = $dbh->prepare('INSERT INTO User(username, password) VALUES(:username, :pw)');
+
     $stmt->bindParam(':username', $_POST['user'], PDO::PARAM_STR);
     $stmt->bindParam(':pw', $_POST['pw'], PDO::PARAM_STR);
     $stmt->execute();

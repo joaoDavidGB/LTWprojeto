@@ -62,6 +62,7 @@
 			                default:
 			                	console.log("response: " + response);
 			                    alert("Error while processing the login...");
+
 			                    break;
 			            }
 			    	}).fail(function(error) {
@@ -106,6 +107,7 @@
 			                    break;
 			                default:
 			                    alert("Error while processing the register...");
+
 			                    break;
 			            }
 			    	}).fail(function(error) {
