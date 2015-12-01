@@ -54,3 +54,7 @@ html, body {
 											  transparent 75%,
 											  transparent)
 }
+
+.listEvents{
+	border: 2px solid red;
+}

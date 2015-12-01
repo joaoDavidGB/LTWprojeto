@@ -22,15 +22,16 @@
 		 		include('database/eventFunc.php');
 		 		$table = getAllEvents();
 		 		$max = sizeof($table);
-		 		echo 'tamanho da tabela de eventos:'.$max."<br>";
 		 		for($i = 0; $i < $max; $i++){
 		 			$line = getLine($table, $i);
+					echo '<div class="listEvents">';
 		 			echo $line['name']."<br>";
 		 			echo $line['dateBegin']."<br>";
 		 			echo $line['location']."<br>";
 		 			$image = $line["image"];
-		 			echo '<img src= "<? $image ?>" alt="eventImage"/>';
+		 			echo '<img src="'.$image.'" alt="eventImage"/>';
 		 			echo "<br><br>";
+					echo '</div>';
 		 		}
 		 	?>
 		</div>
