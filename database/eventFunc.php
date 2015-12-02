@@ -100,7 +100,7 @@ function existEvent($name) {
 }
 
 function getCommentsFromEvent($name){
-	gloabal $db;
+	global $db;
 
 	if(!(existEvent($name)))
 		return -1;
@@ -118,7 +118,7 @@ function getCommentsFromEvent($name){
 
 
 function getEventAdmin($name){
-	gloabal $db;
+	global $db;
 
 	if(!(existEvent($name)))
 		return -1;
@@ -136,10 +136,11 @@ function getEventAdmin($name){
 	$stmt = $db->prepare('SELECT * FROM User WHERE idUser = :id');
 	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
     $stmt->execute();
-	return = $stmt->fetch();
+	return $stmt->fetch();
 }
 
 function getCommentUser($idComment){
+	global $db;
 
 	$stmt = $db->prepare('SELECT idUser FROM Comment WHERE idComment = :idComment');
 	$stmt->bindParam(':idComment', $idComment, PDO::PARAM_INT);
@@ -152,12 +153,12 @@ function getCommentUser($idComment){
 	$stmt = $db->prepare('SELECT * FROM User WHERE idUser = :id');
 	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
     $stmt->execute();
-	return = $stmt->fetch();
+	return $stmt->fetch();
 }
 
 
 function getUsersAttendingEvent($name){
-
+	global $db;
 
 	if(!(existEvent($name)))
 		return -1;
@@ -175,6 +176,8 @@ function getUsersAttendingEvent($name){
 
 	if(count($result)<1)
 		return false;
+
+	return $result;
 }
 
 ?>
