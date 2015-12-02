@@ -47,5 +47,5 @@ CREATE TABLE AttendEvent(
 );
 
 INSERT INTO User Values(0, "master", "abc");
-INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (1,"LOL","01-01-2012","cenas","porto","https://www.google.pt/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj7tciq5rjJAhWCQBoKHYt2DGEQjRwIBw&url=https%3A%2F%2Fstancarey.wordpress.com%2F2013%2F03%2F05%2Fthe-dramatic-grammatic-evolution-of-lol%2F&psig=AFQjCNHA0NEVbuNJuBB6s7ExKNgzmQXOlg&ust=1448995315083619");
-INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (2,"PPPPP","01-03-2012","cenas12","lisbon","https://www.google.pt/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj7tciq5rjJAhWCQBoKHYt2DGEQjRwIBw&url=https%3A%2F%2Fstancarey.wordpress.com%2F2013%2F03%2F05%2Fthe-dramatic-grammatic-evolution-of-lol%2F&psig=AFQjCNHA0NEVbuNJuBB6s7ExKNgzmQXOlg&ust=1448995315083619");
+INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (1,"LOL","01-01-2012","cenas","porto","http://cdn.appstorm.net/mac.appstorm.net/files/2012/07/icon4.png");
+INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (2,"PPPPP","01-03-2012","cenas12","lisbon","https://lh3.googleusercontent.com/5oh994t2XLUThXYZQgeH3lv7Zv0cAHh8qJPuK82tqES6oFDASv4j43D0Hsps84_IhjM=w300");
