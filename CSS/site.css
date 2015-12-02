@@ -23,7 +23,12 @@ html, body {
 	color: orange;
 }
 
+#main{
+	display: inline-block;
+}
+
 #eventList{
+	float: left;
 	width: 40%; 
 	height: 90%; 
 	overflow-y: scroll;
@@ -56,5 +61,90 @@ html, body {
 }
 
 .listEvents{
-	border: 2px solid red;
+	border: 2px outset grey;
+	height: 20%;
+	cursor: pointer;
+}
+
+.listEvents .title{
+	color: orange;
+	font-weight: bold;
+}
+
+.listEvents .date{
+	font-style: italic;
+}
+
+.listEvents .location{
+	color: grey;
+}
+
+.eventResume{
+	margin: 5%;
+	float: right;
+	text-align: center;
+}
+
+.eventImage img{
+	max-height: 100%;
+  	max-width: 20%;
+}
+
+#eventInfo{
+	background-color: white;
+	opacity: 0.6;
+	float: right;
+	color: black;
+	width: 59%; 
+	height: 90%; 
+	overflow-y: scroll;
+	border-right: 1px outset white;
+}
+
+#eventInfo::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#eventInfo::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+#eventInfo::-webkit-scrollbar-thumb
+{
+	background-color: #F90;	
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+#eventInfo .Ftitle{
+	text-align: center;
+	color: orange;
+	font-family: 'Indie Flower', cursive;
+	font-size: 72px;
+}
+
+#eventInfo .Fdate{
+	text-align: center;
+	font-style: italic;
+}
+#eventInfo .Flocation{
+	text-align: center;
+}
+
+#eventInfo .Fdescription{
+	margin: 5%;
+}
+
+#eventInfo .FeventImage{
+	opacity: 1.6;
 }
