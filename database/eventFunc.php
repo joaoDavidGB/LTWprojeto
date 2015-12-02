@@ -90,10 +90,91 @@ function existEvent($name) {
   	global $db;
     $stmt = $db->prepare('SELECT * FROM Event WHERE name = :name');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch();
+
 	if (!(count($result) === 0)) {
 		return false;
 	}
 	return true;
 }
+
+function getCommentsFromEvent($name){
+	gloabal $db;
+
+	if(!(existEvent($name)))
+		return -1;
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	$stmt = $db->prepare('SELECT * FROM Comment WHERE idEvent = :id');
+	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+    $stmt->execute();
+	return $stmt->fetchAll();
+}
+
+
+function getEventAdmin($name){
+	gloabal $db;
+
+	if(!(existEvent($name)))
+		return -1;
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	$stmt = $db->prepare('SELECT idUser FROM AdminEvent WHERE idEvent = :id');
+	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+    $stmt->execute();
+	$result = $stmt->fetch();
+
+	$stmt = $db->prepare('SELECT * FROM User WHERE idUser = :id');
+	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+    $stmt->execute();
+	return = $stmt->fetch();
+}
+
+function getCommentUser($idComment){
+
+	$stmt = $db->prepare('SELECT idUser FROM Comment WHERE idComment = :idComment');
+	$stmt->bindParam(':idComment', $idComment, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	if(!(count($result)===1))
+		return false;
+
+	$stmt = $db->prepare('SELECT * FROM User WHERE idUser = :id');
+	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+    $stmt->execute();
+	return = $stmt->fetch();
+}
+
+
+function getUsersAttendingEvent($name){
+
+
+	if(!(existEvent($name)))
+		return -1;
+
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	$stmt = $db->prepare('SELECT User.* FROM AttendEvent,User WHERE idEvent = :id,User.idUser=AttendEvent.idUser');
+	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+    $stmt->execute();
+	$result = $stmt->fetchAll();
+
+	if(count($result)<1)
+		return false;
+}
+
 ?>
