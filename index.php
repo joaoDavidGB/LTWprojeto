@@ -1,10 +1,16 @@
 <?php
 	session_start();
 
-if (!isset($_SESSION['username']))
-		$_SESSION['username'] = null;
 
-$redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'home';
+
+$redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'site';
+
+if (!isset($_SESSION['username'])){
+		$_SESSION['username'] = null;
+		$redirect = home;
+}
+else if($redirect === 'home')
+	$redirect = 'site';
 
 switch($redirect) {
 		case 'home':
