@@ -46,6 +46,5 @@ CREATE TABLE AttendEvent(
  PRIMARY KEY(idUser,idEvent)
 );
 
-INSERT INTO User Values(0, "master", "abc");
 INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (1,"LOL","01-01-2012","cenas","porto","http://cdn.appstorm.net/mac.appstorm.net/files/2012/07/icon4.png");
 INSERT INTO Event(idEvent, name, dateBegin,description, location, image) Values (2,"PPPPP","01-03-2012","cenas12","lisbon","https://lh3.googleusercontent.com/5oh994t2XLUThXYZQgeH3lv7Zv0cAHh8qJPuK82tqES6oFDASv4j43D0Hsps84_IhjM=w300");

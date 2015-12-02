@@ -13,6 +13,8 @@ function createUser($username, $password){
 		return false;
 	}
 
+	$password = generateHash($password);
+
 	$stmt = $db->prepare('INSERT INTO User(username,password) VALUES(:username, :password)');
 
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -90,18 +92,21 @@ function deleteUser($username){
 
   function getUser($username, $pw) {
   	global $db;
-    $stmt = $db->prepare('SELECT * FROM User WHERE username = :user AND password = :pw');
-    try{
-		$stmt->bindParam(':pw', $pw, PDO::PARAM_STR);
-		$stmt->bindParam(':user', $username, PDO::PARAM_STR);
-		$stmt->execute();
-	}catch(PDOException $e){
-	return -1;
-	}
+
+
+    $stmt = $db->prepare('SELECT password FROM User WHERE username = :user');
+    
+	$stmt->bindParam(':user', $username, PDO::PARAM_STR);
+	$stmt->execute();
+
 	$result = $stmt->fetchAll();
 	if (!(count($result) === 1)) {
 		return false;
 	}
+
+	if(!(verify($pw,$result[0]['password'])))
+		return false;
+
 	return true;
  }
  
@@ -116,4 +121,16 @@ function existUser($username) {
 	}
 	return true;
 }
+
+function generateHash($password) {
+    if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
+        $salt = '$2y$11$' . substr(md5(uniqid(rand(), true)), 0, 22);
+        return crypt($password, $salt);
+    }
+}
+
+function verify($password, $hashedPassword) {
+    return crypt($password, $hashedPassword) == $hashedPassword;
+}
+
 ?>
