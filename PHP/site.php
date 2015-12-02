@@ -8,6 +8,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="jquery/style.js"></script>  
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
 
 	<body bgcolor="white">
@@ -18,6 +19,33 @@
 				echo date('d\/m\/Y')."<br>".date('l H:i e');
 			?>
 			</div>
+			<div id="createEventbutton">
+			<?
+				echo "Create Event";
+			?>
+			</div>
+			<div id="user">
+			<?
+				//session_start();
+				echo $_SESSION['username'];
+
+			?>
+			</div>
+			<div id="userOptions" style="display: none">
+				<p id="logout">Logout</p>
+			</div>
+		</div>
+
+		<div id="createEvent">
+			<h1>Create Event</h1>
+			<form action="/" name="createEventForm" id="createEventForm" method="post">
+				<input type="text" placeholder="name" name="name"><br>
+				<input type="date" placeholder="date" name="dateBegin"><br>
+				<input type="text" placeholder="location" name="location"><br>
+				<input type="text" placeholder="description" name="description"><br>
+				<input type="text" placeholder="image URL" name="image"><br>
+				<input id="submitEvent" type="submit" value="submitEvent">
+			</form>
 		</div>
 
 			<div id="eventList">

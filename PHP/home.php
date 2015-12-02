@@ -56,11 +56,9 @@
 			                    alert("Login failed!");
 			                    break;
 			                case 'login_true':
-			                    console.log("Logined in successfully");
 			                    location.href='index.php?redirect=site';
 			                    break;
 			                default:
-			                	console.log("response: " + response);
 			                    alert("Error while processing the login...");
 
 			                    break;
@@ -102,8 +100,30 @@
 			                    alert("Register failed");
 			                    break;
 			                case 'register_true':
+						        $.post(
+						        'accounts/login.php',
+						        {
+						        'username' : username,
+						        'pw' : password
+						        },
+						        function(data) {
+						            var response = data;
+						            switch(response) {
+						                case 'login_false':
+						                    break;
+						                case 'login_true':
+						                    location.href='index.php?redirect=site';
+						                    break;
+						                default:
+						                    alert("Error while processing the login...");
+
+						                    break;
+						            }
+						            }).fail(function(error) {
+								    			alert("wtf is going on?");
+								                return false;
+								    });      
 			                    alert("Registered successfully");
-					    location.href='index.php?redirect=site';
 			                    break;
 			                default:
 			                    alert("Error while processing the register...");

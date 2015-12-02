@@ -26,11 +26,25 @@ $("document").ready(function(){
         });          
 });
 
+$( "#user" ).click(function() {
+         $("#userOptions").toggle();
+               
+});
 
-
-
-
-
+$( "#logout" ).click(function() {
+         $.post(
+        'accounts/logout.php',
+        {
+            
+        },
+        function(data) {
+            location.href='index.php?redirect=home';
+        }).fail(function(error) {
+                return false;
+        }); 
+               
+});
 
 })
 
+    

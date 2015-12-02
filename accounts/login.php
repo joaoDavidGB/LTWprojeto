@@ -11,6 +11,8 @@
       echo "login_false";
     }
     else if ($user === true){
+      session_start();
+      $_SESSION['username'] = $_POST['username'];
       echo "login_true";
     }
   } catch (PDOException $e) {

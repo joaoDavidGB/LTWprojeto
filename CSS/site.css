@@ -21,11 +21,90 @@ html, body {
 	width: 20%;
 	text-align:center;
 	color: orange;
-}
-
-#main{
 	display: inline-block;
 }
+
+#createEventbutton{
+	cursor: pointer;
+	position: absolute;
+	display: inline-block;
+	right: 50%;
+	background-color: orange;
+	color: black;
+	padding: 3px;
+	border: 2px outset grey;
+}
+
+#user{
+	position: absolute;
+	display: inline-block;
+	right: 5%;
+	color: Gold;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#userOptions{
+	border: 1px outset black;
+	background-color: grey;
+	color: black;
+	padding: 3px;
+	position: absolute;
+	right: 5%;
+	top: 5%;
+	z-index: 1;
+	width: 10%;
+}
+
+#userOptions p{
+	margin: 0px;
+	cursor: pointer;
+}
+
+#createEvent{
+	position: absolute;
+	width: 70%;
+	height: 50%;
+	left: 15%;
+	top: 25%;
+	background-color: white;
+	z-index: 1;
+	display: none;
+
+	border: 2px outset grey;
+	padding: 1%;
+	padding-top: 1.8%;
+	text-align: center;
+	background-image: url(../images/20016.jpg);
+}
+
+#createEvent h1{
+	color: black;
+}
+
+#createEvent input {
+	padding:5px;
+	border:1px solid #ccc;
+	font-size:16px;
+	font-family:raleway;
+	margin-bottom: 5px;
+	width:50%;
+}
+
+#createEvent input[type=submit] {
+	text-decoration:none;
+	width:50%;
+	text-align:center;
+	background-color:#FFBC00;
+	color:#fff;
+	border:1px solid #FFCB00;
+	padding:10px 0;
+	font-size:20px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
 
 #eventList{
 	float: left;
