@@ -164,14 +164,15 @@ html, body {
 	text-align: center;
 }
 
-.eventImage img{
-	max-height: 100%;
-  	max-width: 20%;
+#eventList .eventImage img{
+	margin-left: 2%;
+	max-height: 120px;
+	max-width: 120px;
 }
 
 #eventInfo{
 	background-color: white;
-	opacity: 0.6;
+	opacity: 0.8;
 	float: right;
 	color: black;
 	width: 59%; 
@@ -225,5 +226,5 @@ html, body {
 }
 
 #eventInfo .FeventImage{
-	opacity: 1.6;
+	opacity: 1;
 }
