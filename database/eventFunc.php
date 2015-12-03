@@ -328,5 +328,12 @@ function deleteComment($name, $idComment){
 }
 
 
+function getUsername($idUser){
+	global $db;
+    $stmt = $db->prepare('SELECT username FROM User WHERE idUser = :idUser');
+    $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+    return $stmt->fetch();
+}
 
 ?>
