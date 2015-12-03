@@ -44,7 +44,7 @@
 				<input type="text" placeholder="location" name="location"><br>
 				<input type="text" placeholder="description" name="description"><br>
 				<input type="text" placeholder="image URL" name="image"><br>
-				<input id="submitEvent" type="submit" value="submitEvent">
+				<input id="submitEvent" type="submit" value="Submit Event">
 			</form>
 		</div>
 

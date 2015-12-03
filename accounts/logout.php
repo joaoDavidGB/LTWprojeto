@@ -1,3 +1,4 @@
 <?
+	session_start();
       $_SESSION['username'] = null;
 ?>

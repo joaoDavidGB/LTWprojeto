@@ -1,11 +1,16 @@
-<?php
-$name = $_GET["nomeEvento"];
-$local = $_GET["local"];
-$data = $_GET["data"];
+<?
+  include_once('../database/eventFunc.php'); 
+  
 
-echo "Event: $name <br>" ;
-echo "Local: $local <br>" ;
-echo "Date: $data <br>" ;
-
+  try {
+    $event = createEvent($_POST['name'], $_POST["date"], $_POST["description"], $_POST["location"], $_POST["image"]);
+    if ($event === false){
+      echo "failed_to_create_event";
+    }
+    else if ($event === true){
+      echo "success";
+    }
+  } catch (PDOException $e) {
+    die($e->getMessage());
+  }
 ?>
-<a href="../site.php">Homepage</a>

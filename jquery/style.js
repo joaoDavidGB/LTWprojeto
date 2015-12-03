@@ -27,7 +27,7 @@ $("document").ready(function(){
 });
 
 $( "#user" ).click(function() {
-         $("#userOptions").toggle();
+        $("#userOptions").toggle();
                
 });
 
@@ -44,6 +44,56 @@ $( "#logout" ).click(function() {
         }); 
                
 });
+
+$( "#createEventbutton" ).click(function() {
+         $("#createEvent").toggle();
+               
+});
+
+$("#createEventForm").submit(function(ev){
+                ev.preventDefault();
+
+                var success = false;
+                var name = document.forms["createEventForm"]["name"].value;
+                var date = document.forms["createEventForm"]["dateBegin"].value;
+                var location2 = document.forms["createEventForm"]["location"].value;
+                var description = document.forms["createEventForm"]["description"].value;
+                var image = document.forms["createEventForm"]["image"].value;
+
+                if (name == "" || date == "" || location == "" || description == "" || image == "") {
+                    alert("Fill every field before submiting.");
+                    return false;
+                };
+
+
+                $.post(
+                    'events/createEvent.php',
+                    {
+                    'name' : name,
+                    'date' : date,
+                    'location' : location2,
+                    'description' : description,
+                    'image' : image
+                    },
+                    function(data) {
+                        switch(data) {
+                            case 'failed_to_create_event':
+                                alert("failed to create the event!");
+                                break;
+                            case 'success':
+                                location.reload();
+                                break;
+                            default:
+                                alert("Error while processing the creation of the event...");
+
+                                break;
+                        }
+                    }).fail(function(error) {
+                            alert("wtf is going on?");
+                            return false;
+                });     
+            });
+
 
 })
 
