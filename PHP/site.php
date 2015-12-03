@@ -107,6 +107,26 @@
 					 			echo '<div class="FeventImage">';
 						 			echo '<img src="'.$line["image"].'" alt="eventImage"/>';
 								echo '</div>';
+								echo '<div class="Fcomments">';
+									$tableCom = getCommentsFromEvent($line['name']);
+									//var_dump($tableCom);
+									$maxCom = sizeof($tableCom);
+									if($maxCom!=0){
+										for($j = 0; $j < $maxCom; $j++){
+											$lineCom = getLine($tableCom, $j);
+											echo '<div class "FcomUser">';
+												$comUser = getUsername($lineCom['idUser']);
+												echo $comUser['username']."<br>";
+											echo '</div>';
+											echo '<div class "FcomBody">';
+												echo $lineCom['commentary']."<br>";
+											echo '</div>';
+
+										}
+
+									}
+								echo '</div>';
+
 							echo '</div>';
 					}
 				?>

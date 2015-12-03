@@ -133,4 +133,6 @@ function verify($password, $hashedPassword) {
     return crypt($password, $hashedPassword) == $hashedPassword;
 }
 
+
+
 ?>
