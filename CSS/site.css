@@ -250,3 +250,12 @@ html, body {
 	max-height: 150px;
 	max-width: 500px;
 }
+
+#Fcomments{
+	border: 2px solid black;
+}
+
+#Fcomments #addComment{
+	border: 3px inset orange;
+	background-color: grey;
+}

@@ -96,9 +96,11 @@
 					 			echo '<div class="Fhost">';
 					 				if (getEventAdmin($line['name'])['username'] != $_SESSION['username']){
 					 					echo '<div class="hostName">host: '.getEventAdmin($line['name'])['username'].'</div>';
+					 					echo '<div class="deleteEvent" style="display: none;">Delete Event</div>';
 					 				}
 					 				else{
 					 					echo '<div class="deleteEvent">Delete Event</div>';
+					 					echo '<div class="hostName" style="display: none;">host: '.getEventAdmin($line['name'])['username'].'</div>';
 					 				}
 					 			echo '</div>';
 					 			echo '<div class="Fdescription">';
@@ -107,23 +109,38 @@
 					 			echo '<div class="FeventImage">';
 						 			echo '<img src="'.$line["image"].'" alt="eventImage"/>';
 								echo '</div>';
-								echo '<div class="Fcomments">';
+								echo '<div id="Fcomments">';
+
+									echo '<div id="addComment">';
+										?>
+										<form action="/" name="addComent" id="addComment" method="post">
+											<input type="text" placeholder="Insert comment here!" name="comment"><br>
+											<input id="submitComment" type="submit" value="Submit Comment">
+										</form>
+										<?
+									echo '</div>';
+
 									$tableCom = getCommentsFromEvent($line['name']);
 									//var_dump($tableCom);
 									$maxCom = sizeof($tableCom);
+									$maxCom = 0;
 									if($maxCom!=0){
 										for($j = 0; $j < $maxCom; $j++){
 											$lineCom = getLine($tableCom, $j);
-											echo '<div class "FcomUser">';
+											echo '<div class="FcomUser">';
 												$comUser = getUsername($lineCom['idUser']);
 												echo $comUser['username']."<br>";
 											echo '</div>';
-											echo '<div class "FcomBody">';
+											echo '<div class="FcomBody">';
 												echo $lineCom['commentary']."<br>";
 											echo '</div>';
 
 										}
 
+									}
+									else{
+										echo '<div class="FcomUser"></div>';
+										echo '<div class="FcomBody"></div>';
 									}
 								echo '</div>';
 

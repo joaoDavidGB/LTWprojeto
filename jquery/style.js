@@ -11,19 +11,53 @@ $("document").ready(function(){
             data=JSON.parse(data);
             var name = data['name'];
             var date = data['dateBegin'];
-            var location = data['location'];
+            var local = data['location'];
             var description = data['description'];
             var image = data['image'];
             var host = data['host'];
+            var tableCom = data['tableCom'];
+            var maxCom = data['maxCom'];
+
+            //alteração da informação do host
+            //no caso de ser o proprio user, aparece um botão para dar delete ao evento
+            if (host == "Delete Event"){
+                $( ".deleteEvent").text( host);
+                $( ".deleteEvent").show();
+                $( ".hostName").hide();
+            }
+            else{
+                $( ".hostName").text(host);
+                $( ".hostName").show();
+                $( ".deleteEvent").hide();
+            }
             
+            //alteração de informação genérica
             $( ".Ftitle" ).text( name);
             $( ".Fdate" ).text( date);
-            $( ".Flocation" ).text( location);
+            $( ".Flocation" ).text( local);
             $( ".Fdescription" ).text( description);
-            //$( ".FeventImage" ).text("<img src=" + image + " alt=" + "eventImage"+" />");
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
             
-            $( ".Fhost").text(host);
+            //codigo para alteração de comentarios a apresentar
+            //array com informação relativa aos comentarios
+            var ComentaryArray = data['ArrayCom'];
+            //se não houver comentários, dá replace com divs vazios
+            if (maxCom == 0){
+                $(".FcomUser").replaceWith('<div class="FcomUser"></div>');
+                $(".FcomBody").replaceWith('<div class="FcomBody"></div>');
+            }
+            for(var j = 0; j < maxCom; j++){
+                //na primeira iteração dá replace em todos os comments com o primeiro
+                if(j==0){
+                    $(".FcomUser").replaceWith('<div class="FcomUser">' + ComentaryArray[0] + '</div>');
+                    $(".FcomBody").replaceWith('<div class="FcomBody">' + ComentaryArray[1] + '</div>');
+                } 
+                else{
+                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+                }
+            }
+
         }).fail(function(error) {
                 return false;
         });          
@@ -122,6 +156,45 @@ $( ".deleteEvent" ).click(function(e) {
                 return false;
         }); 
                
+});
+
+$("#addComment").submit(function(ev){
+                ev.preventDefault();
+
+                var eventName = ($(".Ftitle").text());
+                var comment = document.forms["addComment"]["comment"].value;
+
+                if (comment == "") {
+                    alert("You did not fill the comment field");
+                    return false;
+                };
+
+
+                $.post(
+                    'events/addComment.php',
+                    {
+                    'eventName' : eventName,
+                    'comment' : comment
+                    },
+                    function(data) {
+                        switch(data) {
+                            case 'failed_to_add_comment':
+                                alert("failed to add comment!");
+                                break;
+                            case 'success':
+                                alert("success!!!!");
+                                location.reload();
+                                break;
+                            default:
+                                alert(data);
+
+                                break;
+                        }
+                    }).fail(function(error) {
+                            alert("wtf is going on?");
+                            return false;
+                });     
+
 });
 
 })

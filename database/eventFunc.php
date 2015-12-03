@@ -8,7 +8,7 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 	$stmt = $db->prepare('SELECT * FROM Event where name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
-	$result = $stmt->fetchAll();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	if (count($result) > 0) {
 		return false;
@@ -58,7 +58,7 @@ function deleteEvent($name){
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 
-	$result = $stmt->fetchAll();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	if (!(count($result) === 1)) {
 		return false;
@@ -98,7 +98,7 @@ function getAllEvents(){
 
 	$stmt = $db->prepare('SELECT * FROM Event');
     $stmt->execute();
-	return $stmt->fetchAll();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
@@ -122,18 +122,20 @@ function existEvent($name) {
 function getCommentsFromEvent($name){
 	global $db;
 
-	if(!(existEvent($name)))
+	if(!(existEvent($name))){
 		return -1;
+	}
 
 	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
+	$idEvent = $result['idEvent'];
 
 	$stmt = $db->prepare('SELECT * FROM Comment WHERE idEvent = :id');
-	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+	$stmt->bindParam(':id', $idEvent, PDO::PARAM_INT);
     $stmt->execute();
-	return $stmt->fetchAll();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
@@ -194,7 +196,7 @@ function getUsersAttendingEvent($name){
 	$stmt = $db->prepare('SELECT User.* FROM AttendEvent,User WHERE idEvent = :id,User.idUser=AttendEvent.idUser');
 	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
     $stmt->execute();
-	$result = $stmt->fetchAll();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	if(count($result)<1)
 		return false;
@@ -209,7 +211,7 @@ function getEventsAttendedByUser($username){
 	$stmt = $db->prepare('SELECT idUser FROM User WHERE username = :username');
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 	$stmt->execute();
-	$result = $stmt->fetchAll();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	if(!(count($result)===1))
 		return false;
@@ -219,7 +221,7 @@ function getEventsAttendedByUser($username){
 	$stmt = $db->prepare('SELECT Event.* FROM AttendEvent, Event WHERE idUser = :id');
 	$stmt->bindParam(':id', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
-	return  $stmt->fetchAll();
+	return  $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function willAttend($name){
@@ -280,28 +282,36 @@ return true;
 }
 
 function addComment($name, $commentary){
+	global $db;
 
-	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt = $db->prepare('SELECT * FROM Event WHERE name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 	$idEvent = $stmt->fetch();
-
-	if(!(count($result))===1){
+	$idEvent = $idEvent['idEvent'];
+	if($idEvent == null)
 		return false;
-	}
 
-
-	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
+	session_start();
+	$stmt = $db->prepare('SELECT * FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
 	$idUser = $stmt->fetch();
+	$idUser = $idUser['idUser'];
+	if($idUser == null)
+		return false;
 
-	$stmt = $db->prepare('INSERT INTO Comment(idUser,idEvent, commentary) VALUES (:idUser,:idEvent,:commentaty)');
+	$stmt = $db->prepare('INSERT INTO Comment(idUser,idEvent, commentary) VALUES (:idUser,:idEvent,:commentary)');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':commentary', $commentary, PDO::PARAM_STR);
 
 	$stmt->execute();
+	if(!$stmt){
+		return false;
+	}
+
+	return true;
 }
 
 function deleteComment($name, $idComment){
