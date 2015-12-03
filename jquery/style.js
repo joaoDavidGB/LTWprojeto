@@ -14,6 +14,7 @@ $("document").ready(function(){
             var location = data['location'];
             var description = data['description'];
             var image = data['image'];
+            var host = data['host'];
             
             $( ".Ftitle" ).text( name);
             $( ".Fdate" ).text( date);
@@ -21,6 +22,8 @@ $("document").ready(function(){
             $( ".Fdescription" ).text( description);
             //$( ".FeventImage" ).text("<img src=" + image + " alt=" + "eventImage"+" />");
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
+            
+            $( ".Fhost").text(host);
         }).fail(function(error) {
                 return false;
         });          

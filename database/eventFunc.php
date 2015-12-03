@@ -3,6 +3,7 @@ include_once('connection.php');
 
 function createEvent($name, $dateBegin ,$description, $location, $image){
 	global $db;
+	session_start();
 
 	$stmt = $db->prepare('SELECT * FROM Event where name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -23,15 +24,17 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 
 	$stmt->execute();
 
-	$stmt = $db->prepare('SELECT idEvent FROM Event where name = :name');
+	$stmt = $db->prepare('SELECT * FROM Event where name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 	$idEvent = $stmt->fetch();
+	$idEvent = $idEvent['idEvent'];
 
-	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
+	$stmt = $db->prepare('SELECT * FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
 	$idUser = $stmt->fetch();
+	$idUser = $idUser['idUser'];
 	
 
 	$stmt = $db->prepare('INSERT INTO AdminEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
@@ -144,11 +147,13 @@ function getEventAdmin($name){
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
+	$result = $result['idEvent'];
 
 	$stmt = $db->prepare('SELECT idUser FROM AdminEvent WHERE idEvent = :id');
 	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
     $stmt->execute();
 	$result = $stmt->fetch();
+	$result = $result['idUser'];
 
 	$stmt = $db->prepare('SELECT * FROM User WHERE idUser = :id');
 	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
