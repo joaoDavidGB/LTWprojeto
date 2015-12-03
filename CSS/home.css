@@ -5,6 +5,9 @@ html, body {
 	padding: 0;
 	font-family: sans-serif;
 	background-image: url(../images/homeBKG.jpg);
+	background-position: center; 
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #forms{
@@ -12,14 +15,14 @@ html, body {
 	text-align: center;
 	left: 5%;
 	top: 10%;
-
+	min-width: 400px;
 	padding: 2%;
 	width: 50%;
 
 }
 #forms h1{
-	margin-top: 2px;
-	margin-bottom: 20px;
+	margin-top: 5%;
+	margin-bottom: 5%;
 	color: orange;
 	font-family: 'Indie Flower', cursive;
 	font-size: 72px;
@@ -31,7 +34,6 @@ html, body {
 
 	border: 2px outset grey;
 	padding: 1%;
-	padding-top: 1.8%;
 }
 
 #registerMenu{
@@ -44,9 +46,28 @@ html, body {
 
 input {
 	padding:5px;
-	border:1px solid #ccc;
+	border:3px solid #ccc;
 	font-size:16px;
 	font-family:raleway;
+	margin-bottom: 5px;
+	width:90%;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes buttonColors {
+     50% {background: red bottom right/50px 50px;}
+}
+
+/* Standard syntax */
+@keyframes buttonColors {
+   50% {background: red bottom right/50px 50px;}
+}
+
+
+input[id=loginbutton]:hover,input[type=submit]:hover{
+	background-color: orange;
+	-webkit-animation: mymove 1s infinite; /* Chrome, Safari, Opera */
+    	animation: buttonColors 2s infinite;
 }
 
 input[id=loginbutton]{
