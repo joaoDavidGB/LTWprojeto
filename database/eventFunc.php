@@ -23,6 +23,21 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 
 	$stmt->execute();
 
+	$stmt = $db->prepare('SELECT idEvent FROM Event where name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result->fetch();
+
+	$stmt = $db->prepare('INSERT INTO AdminEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$stmt = $db->prepare('INSERT INTO AttendEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->execute();
+
 	return true;
 }
 
@@ -178,6 +193,70 @@ function getUsersAttendingEvent($name){
 		return false;
 
 	return $result;
+}
+
+function getEventsAttendedByUser($username){
+	global $db;
+
+
+	$stmt = $db->prepare('SELECT idUser FROM User WHERE username = :username');
+	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+	if(!(count($result)===1))
+		return false;
+
+	$idUser = $result[0]['idUser'];
+
+	$stmt = $db->prepare('SELECT Event.* FROM AttendEvent, Event WHERE idUser = :id');
+	$stmt->bindParam(':id', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+	return = $stmt->fetchAll();
+}
+
+function willAttend($name){
+	global $db;
+
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	if(!(count($result))===1){
+		return false;
+	}
+
+	$stmt = $db->prepare('INSERT INTO AttendEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->execute();
+
+return true;
+}
+
+
+function stopAttend($name){
+	global $db;
+
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	if(!(count($result))===1){
+		return false;
+	}
+
+
+	$stmt = $db->prepare('DELETE * FROM AttendEvent WHERE idEvent = :idEvent AND idUser = :idUser';
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->execute();
+
+return true;
 }
 
 ?>
