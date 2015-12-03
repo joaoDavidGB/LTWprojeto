@@ -212,7 +212,7 @@ function getEventsAttendedByUser($username){
 	$stmt = $db->prepare('SELECT Event.* FROM AttendEvent, Event WHERE idUser = :id');
 	$stmt->bindParam(':id', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
-	return = $stmt->fetchAll();
+	return  $stmt->fetchAll();
 }
 
 function willAttend($name){
@@ -251,12 +251,51 @@ function stopAttend($name){
 	}
 
 
-	$stmt = $db->prepare('DELETE * FROM AttendEvent WHERE idEvent = :idEvent AND idUser = :idUser';
+	$stmt = $db->prepare('DELETE * FROM AttendEvent WHERE idEvent = :idEvent AND idUser = :idUser');
 	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
 	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
 	$stmt->execute();
 
 return true;
 }
+
+function addComment($name, $commentary){
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	if(!(count($result))===1){
+		return false;
+	}
+
+	$stmt = $db->prepare('INSERT INTO Comment(idUser,idEvent, commentary) VALUES (:idUser,:idEvent,:commentaty)');
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->bindParam(':commentary', $commentary, PDO::PARAM_STR);
+
+	$stmt->execute();
+}
+
+function deleteComment($name, $idComment){
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetch();
+
+	if(!(count($result))===1){
+		return false;
+	}
+
+	$stmt = $db->prepare('DELETE FROM Comment WHERE idEvent = :idEvent AND idUser = :idUser AND idComment = :idComment');
+	$stmt->bindParam(':idUser', $_SESSION['idUser'], PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $result, PDO::PARAM_INT);
+	$stmt->bindParam(':idComment', $idComment, PDO::PARAM_INT);
+	$stmt->execute();
+}
+
+
 
 ?>
