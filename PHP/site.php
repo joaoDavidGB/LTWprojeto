@@ -78,25 +78,37 @@
 			<div id="eventInfo">
 				<?
 			 		$table = getAllEvents();
-			 		$line = getLine($table, 0);
+			 		$max = sizeof($table);
+			 		if ($max != 0){
+				 		$line = getLine($table, 0);
 
-			 		echo '<div class="EventsInfo"> ';
-			 				echo '<div class="Ftitle">';
-				 				echo $line['name']."<br>";
-				 			echo '</div>';
-				 			echo '<div class="Fdate">';
-				 				echo $line['dateBegin']."<br>";
-				 			echo '</div>';
-				 			echo '<div class="Flocation">';
-				 				echo $line['location']."<br>";
-				 			echo '</div>';
-				 			echo '<div class="Fdescription">';
-				 				echo $line['description']."<br>";
-				 			echo '</div>';
-				 			echo '<div class="FeventImage">';
-					 			echo '<img src="'.$line["image"].'" alt="eventImage"/>';
+				 		echo '<div class="EventsInfo"> ';
+				 				echo '<div class="Ftitle">';
+					 				echo $line['name']."<br>";
+					 			echo '</div>';
+					 			echo '</div>';
+					 			echo '<div class="Fdate">';
+					 				echo $line['dateBegin']."<br>";
+					 			echo '</div>';
+					 			echo '<div class="Flocation">';
+					 				echo $line['location']."<br>";
+					 			echo '</div>';
+					 			echo '<div class="Fhost">';
+					 				if (getEventAdmin($line['name'])['username'] != $_SESSION['username']){
+					 					echo '<div class="hostName">host: '.getEventAdmin($line['name'])['username'].'</div>';
+					 				}
+					 				else{
+					 					echo '<div class="deleteEvent">Delete Event</div>';
+					 				}
+					 			echo '</div>';
+					 			echo '<div class="Fdescription">';
+					 				echo $line['description']."<br>";
+					 			echo '</div>';
+					 			echo '<div class="FeventImage">';
+						 			echo '<img src="'.$line["image"].'" alt="eventImage"/>';
+								echo '</div>';
 							echo '</div>';
-						echo '</div>';
+					}
 				?>
 			</div>
 	</body>

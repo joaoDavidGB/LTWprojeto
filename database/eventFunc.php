@@ -26,12 +26,12 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 	$stmt = $db->prepare('SELECT idEvent FROM Event where name = :name');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
-	$idEvent->fetch();
+	$idEvent = $stmt->fetch();
 
 	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
-	$idUser->fetch();
+	$idUser = $stmt->fetch();
 	
 
 	$stmt = $db->prepare('INSERT INTO AdminEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
@@ -110,7 +110,7 @@ function existEvent($name) {
     $stmt->execute();
     $result = $stmt->fetch();
 
-	if (!(count($result) === 0)) {
+	if ((count($result) === 0)) {
 		return false;
 	}
 	return true;
@@ -235,7 +235,7 @@ function willAttend($name){
 	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
-	$idUser->fetch();
+	$idUser = $stmt->fetch();
 
 	$stmt = $db->prepare('INSERT INTO AttendEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
 	$stmt->bindParam(':idUser', idUser, PDO::PARAM_INT);
@@ -263,7 +263,7 @@ function stopAttend($name){
 	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
-	$idUser->fetch();
+	$idUser = $stmt->fetch();
 
 
 	$stmt = $db->prepare('DELETE * FROM AttendEvent WHERE idEvent = :idEvent AND idUser = :idUser');
@@ -289,7 +289,7 @@ function addComment($name, $commentary){
 	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
-	$idUser->fetch();
+	$idUser = $stmt->fetch();
 
 	$stmt = $db->prepare('INSERT INTO Comment(idUser,idEvent, commentary) VALUES (:idUser,:idEvent,:commentaty)');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -313,7 +313,7 @@ function deleteComment($name, $idComment){
 	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
 	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
 	$stmt->execute();
-	$idUser->fetch();
+	$idUser = $stmt->fetch();
 
 	$stmt = $db->prepare('DELETE FROM Comment WHERE idEvent = :idEvent AND idUser = :idUser AND idComment = :idComment');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);

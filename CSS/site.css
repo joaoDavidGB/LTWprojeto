@@ -206,7 +206,23 @@ html, body {
 											  transparent)
 }
 
+#eventInfo .Fhost{
+	margin-top: 2%;
+	text-align: center;
+}
+
+.deleteEvent{
+	position: relative;
+	margin: auto;
+	width: 12%;
+	cursor: pointer;
+	border: 3px outset grey;
+	background-color: orange;
+	color: black;
+}
+
 #eventInfo .Ftitle{
+	z-index: 100;
 	text-align: center;
 	color: orange;
 	font-family: 'Indie Flower', cursive;
@@ -225,6 +241,12 @@ html, body {
 	margin: 5%;
 }
 
-#eventInfo .FeventImage{
+#eventInfo .FeventImage img{
+	z-index: -1;
 	opacity: 1;
+	position: absolute;
+	top: 10%;
+	left: 41%;
+	max-height: 150px;
+	max-width: 500px;
 }

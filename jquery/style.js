@@ -84,7 +84,7 @@ $("#createEventForm").submit(function(ev){
                                 location.reload();
                                 break;
                             default:
-                                alert("Error while processing the creation of the event...");
+                                alert(data);
 
                                 break;
                         }
@@ -92,8 +92,34 @@ $("#createEventForm").submit(function(ev){
                             alert("wtf is going on?");
                             return false;
                 });     
-            });
+});
 
+$( ".deleteEvent" ).click(function(e) {
+        var name = ($(".Ftitle").text());
+
+         $.post(
+        'events/deleteEvent.php',
+        {
+            'name' : name
+        },
+        function(data) {
+            switch(data) {
+                case 'failed_to_delete_event':
+                    alert("failed to delete the event!");
+                    break;
+                case 'success':
+                    location.reload();
+                    break;
+                default:
+                    alert(data);
+
+                    break;
+                        }
+        }).fail(function(error) {
+                return false;
+        }); 
+               
+});
 
 })
 
