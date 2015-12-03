@@ -57,33 +57,29 @@ function deleteEvent($name){
 
 	$idEvent = $result[0]['idEvent'];
 
-	$stmt = $db->prepare('DELETE FROM AttendEvent WHERE idUser = :idUser');
-	$stmt->bindParam(':idUser', $idEvent, PDO::PARAM_INT);
+
+
+	$stmt = $db->prepare('DELETE FROM AttendEvent WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-	$stmt = $db->prepare('DELETE FROM Comment WHERE idUser = :idUser');
-	$stmt->bindParam(':idUser', $idEvent, PDO::PARAM_INT);
+	$stmt = $db->prepare('DELETE FROM Comment WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-	$stmt = $db->prepare('SELECT idEvent FROM AdminEvent WHERE idEvent = :idEvent');
-	$stmt->bindParam(':idUser', $idEvent, PDO::PARAM_INT);
+	$stmt = $db->prepare('DELETE FROM AdminEvent WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-	$result = $stmt->fetchAll();
-
-	$stmt = $db->prepare('DELETE FROM AdminEvent WHERE idUser = :idUser');
-	$stmt->bindParam(':idUser', $idEvent, PDO::PARAM_INT);
+	
+	$stmt = $db->prepare('DELETE FROM EventType WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-	foreach($result as $row) {
-		$stmt = $db->prepare('DELETE FROM EventType WHERE idEvent = :idEvent');
-		$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
-		$stmt->execute();
-
-		$stmt = $db->prepare('DELETE FROM Event WHERE idEvent = :idEvent');
-		$stmt->bindParam(':idEvent', $row['idEvent'], PDO::PARAM_INT);
-		$stmt->execute();
-	}
+	$stmt = $db->prepare('DELETE FROM Event WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent',$idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+	
 
 	return true;
 }
