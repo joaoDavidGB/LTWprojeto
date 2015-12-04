@@ -117,6 +117,7 @@
 											<input type="text" placeholder="Insert comment here!" name="comment"><br>
 											<input id="submitComment" type="submit" value="Submit Comment">
 										</form>
+										
 										<?
 									echo '</div>';
 

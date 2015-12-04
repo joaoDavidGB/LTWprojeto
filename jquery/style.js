@@ -41,21 +41,12 @@ $("document").ready(function(){
             //codigo para alteração de comentarios a apresentar
             //array com informação relativa aos comentarios
             var ComentaryArray = data['ArrayCom'];
+            $(".FcomUser").remove();
+            $(".FcomBody").remove();
             //se não houver comentários, dá replace com divs vazios
-            if (maxCom == 0){
-                $(".FcomUser").replaceWith('<div class="FcomUser"></div>');
-                $(".FcomBody").replaceWith('<div class="FcomBody"></div>');
-            }
             for(var j = 0; j < maxCom; j++){
-                //na primeira iteração dá replace em todos os comments com o primeiro
-                if(j==0){
-                    $(".FcomUser").replaceWith('<div class="FcomUser">' + ComentaryArray[0] + '</div>');
-                    $(".FcomBody").replaceWith('<div class="FcomBody">' + ComentaryArray[1] + '</div>');
-                } 
-                else{
-                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
-                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
-                }
+                $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+                $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
             }
 
         }).fail(function(error) {

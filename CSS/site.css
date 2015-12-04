@@ -252,10 +252,37 @@ html, body {
 }
 
 #Fcomments{
-	border: 2px solid black;
+	border: 2px solid grey;
+	padding: 0.5%;
 }
 
 #Fcomments #addComment{
 	border: 3px inset orange;
 	background-color: grey;
 }
+
+#Fcomments #addComment input[type=text]{
+	width: 95%;
+    position: relative;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#Fcomments #addComment input[type=submit]{
+	position: relative;
+    left: 82%;
+    margin-bottom: 1%;
+}
+
+.FcomUser{
+	color: blue;
+	font-style: italic;
+	font-weight: bolder;
+}
+
+.FcomBody{
+	margin-bottom: 2%;
+	margin-left: 1%;
+}
+    
