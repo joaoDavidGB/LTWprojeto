@@ -6,7 +6,7 @@
     
   //recebe todas as informções do evento presentes na table Event
   $table = getAllEvents();
-  $line = getLine($table, $_POST['id']);
+  $line = getEventfromID($_POST['id']);
   
 
   //verifica quem é o admin do evento.

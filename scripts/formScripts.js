@@ -199,4 +199,119 @@ $("document").ready(function(){
 
 	});
 
+	$("#searchEvent").submit(function(ev){
+		ev.preventDefault();
+
+		var name = document.forms["searchEvent"]["name"].value;
+
+		//verifica se o texto foi preenchido
+		if (name == "") {
+			return false;
+		};
+
+		var eventID;
+
+		$.post(
+        'events/search.php',
+        {
+            'name' : name
+        },
+        function(data) {
+        	if (data == "fail"){
+        		return false;
+        	}
+        	else{
+        		eventID = data;
+
+        		$.post(
+		        'events/getEventInfo.php',
+		        {
+		            'id' : eventID
+		        },
+		        function(data) {
+		            data=JSON.parse(data);
+		            var name = data['name'];
+
+		            //quando se carrega no mesmo evento ele esconde-se 
+		            if ($( ".Ftitle" ).text() == name){
+		                $("#eventInfo").toggle();
+		                return false;
+		            }
+		            $("#eventInfo").hide();
+
+		            var date = data['dateBegin'];
+		            var local = data['location'];
+		            var description = data['description'];
+		            var image = data['image'];
+		            var host = data['host'];
+		            var tableCom = data['tableCom'];
+		            var maxCom = data['maxCom'];
+		            var timeH = data['time'];
+		            var type = data['type'];
+
+		            var go = data['attend'];
+
+		            //alteração da informação do host
+		            //no caso de ser o proprio user, aparece um botão para dar delete ao evento
+		            if (host == "Delete Event"){
+		                $( ".deleteEvent").text( host);
+		                $( ".deleteEvent").show();
+		                $( ".hostName").hide();
+		            }
+		            else{
+		                $( ".hostName").text(host);
+		                $( ".hostName").show();
+		                $( ".deleteEvent").hide();
+		            }
+
+		            if(go){
+		                $( ".FgoingT").show();
+		                $( ".FgoingF").hide();
+		                $( ".FstopT").hide();
+		                $( ".FstopF").show();
+		            }
+		            else{
+		                $( ".FgoingT").hide();
+		                $( ".FgoingF").show();
+		                $( ".FstopT").show();
+		                $( ".FstopF").hide();
+		            }
+		            
+		            //alteração de informação genérica
+		            $( ".Ftitle" ).text( name);
+		            $( ".Fdate" ).text( date);
+		            $( ".Ftime").text( timeH);
+		            $( ".Ftype").text(type);
+		            $( ".Flocation" ).text( local);
+		            $( ".Fdescription" ).text( description);
+		            $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
+		            
+		            //codigo para alteração de comentarios a apresentar
+		            //array com informação relativa aos comentarios
+		            var ComentaryArray = data['ArrayCom'];
+		            $(".FcomUser").remove();
+		            $(".FcomBody").remove();
+		            //se não houver comentários, dá replace com divs vazios
+		            for(var j = 0; j < maxCom; j++){
+		                $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+		                $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+		            }
+
+		            $("#eventInfo").show( "slow");
+
+		        }).fail(function(error) {
+		                return false;
+		        });     
+
+
+
+
+
+        	}
+        }).fail(function(error) {
+                return false;
+        });  
+
+	});
+
 })

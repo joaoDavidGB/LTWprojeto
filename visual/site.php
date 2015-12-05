@@ -21,6 +21,11 @@
 				echo date('d\/m\/Y')."<br>".date('l H:i e');
 			?>
 			</div>
+			<div id="searchEvent">
+				<form action="/" name="searchEvent" id="searchEvent" method="post">
+				<input type="text" placeholder="Search an Event" name="name">
+				</form>
+			</div>
 			<div id="createEventbutton">
 				Create Event
 			</div>
@@ -59,13 +64,14 @@
 			 		$max = sizeof($table);
 			 		for($i = 0; $i < $max; $i++){
 			 			$line = getLine($table, $i);
+			 			$idEvent = $line['idEvent'];
 			 			$name = $line['name'];
 			 			$date = $line['dateBegin'];
 			 			$time = $line['time'];
 			 			$type = getEventType($name);
 			 			$location = $line['location'];
 			 			$image = $line["image"];
-						echo '<div id='.$i.' class="listEvents"> ';
+						echo '<div id='.$idEvent.' class="listEvents"> ';
 							echo '<div class="eventResume">';
 								echo '<div class="title">'.$name.'<br></div>';
 					 			echo '<div class="date">'.$date.'<br></div>';

@@ -24,6 +24,12 @@ html, body {
 	display: inline-block;
 }
 
+#searchEvent{
+	position: absolute;
+	display: inline-block;
+	left: 20%;
+}
+
 #createEventbutton{
 	cursor: pointer;
 	position: absolute;

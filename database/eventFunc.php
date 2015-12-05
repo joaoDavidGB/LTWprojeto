@@ -399,4 +399,31 @@ function getEventType($name){
 
 }
 
+function getEventId($name){
+	global $db;
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$idEvent = $stmt->fetch();
+	$idEvent = $idEvent['idEvent'];
+	if ($idEvent == null)
+		return -1;
+	else
+		return $idEvent;
+}
+
+function getEventfromID($idEvent){
+	global $db;
+
+	$stmt = $db->prepare('SELECT * FROM Event WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_STR);
+	$stmt->execute();
+	$Event = $stmt->fetch();
+	if ($Event == null)
+		return false;
+	else
+		return $Event;
+}
+
 ?>
