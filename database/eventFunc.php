@@ -221,9 +221,10 @@ function getUsersAttendingEvent($name){
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->execute();
 	$result = $stmt->fetch();
+	$idEvent = $result['idEvent'];
 
-	$stmt = $db->prepare('SELECT User.* FROM AttendEvent,User WHERE idEvent = :id,User.idUser=AttendEvent.idUser');
-	$stmt->bindParam(':id', $result, PDO::PARAM_INT);
+	$stmt = $db->prepare('SELECT User.username FROM AttendEvent,User WHERE idEvent = :id AND User.idUser=AttendEvent.idUser');
+	$stmt->bindParam(':id', $idEvent, PDO::PARAM_INT);
     $stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -304,7 +305,7 @@ function willAttend($name){
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-return true;
+	return true;
 }
 
 
@@ -331,7 +332,7 @@ function stopAttend($name){
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
-return true;
+	return true;
 }
 
 function addComment($name, $commentary){

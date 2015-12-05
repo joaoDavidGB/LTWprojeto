@@ -28,6 +28,8 @@ $("document").ready(function(){
             var maxCom = data['maxCom'];
             var timeH = data['time'];
             var type = data['type'];
+            var people = data['people'];
+            var numberPeople = data['Npeople'];
 
             var go = data['attend'];
 
@@ -67,7 +69,16 @@ $("document").ready(function(){
                 $( ".FstopT").hide();
                 $( ".FstopF").hide();
             }
-            
+
+            $("#Fpeople").text(numberPeople + " people going.");
+            $("#FlistPeople").hide();
+            $("#FlistPeople").empty();
+            $("#FlistPeople").append('<p id="listTitle">List of people</p>');
+            for(var i = 0; i < numberPeople; i++){
+                var person = people[i]['username'];
+                $("#FlistPeople").append('<p>'+person+'</p>');
+            }
+
             //alteração de informação genérica
             $( ".Ftitle" ).text( name);
             $( ".Fdate" ).text( date);
@@ -275,6 +286,18 @@ $("document").ready(function(){
         $("#editEvent").hide();
 
     });
+
+    $( "#Fpeople").click(function(){
+        $("#FlistPeople").toggle();
+        $("#closeList").toggle();
+
+    })
+
+    $( "#closeList").click(function(){
+        $("#FlistPeople").toggle();
+        $("#closeList").toggle();
+
+    })
 })
 
     

@@ -129,13 +129,26 @@
 					 						echo '<div class="FgoingF">Going</div>';
 					 						echo '<div class="FstopT">Not Going</div>';
 					 				echo '</div>';
+
+
+					 				$people = getUsersAttendingEvent($name);
+					 				$Npeople = count($people);
+
+					 				echo '<div id="Fpeople">';
+					 					echo $Npeople.' people going.';
+					 				echo '</div>';
+					 				echo '<div id="FlistPeople" style="display:none;">';
+					 					echo '<p id="listTitle">List of people</p>';
+					 					for($i = 0; $i < $Npeople; $i++){
+					 						$person = getLine($people, $i)['username'];
+					 						echo '<p>'.$person.'</p>';
+					 					}
+					 				echo '</div>';
+					 				echo '<button id="closeList">X</button>';
 					 			echo '</div>';
 
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
 					 			echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
-								
-
-
 
 
 								echo '<div id="Fcomments">';

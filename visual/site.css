@@ -41,6 +41,11 @@ html, body {
 	border: 2px outset grey;
 }
 
+#createEventbutton:hover{
+	background-color: white;
+	border: 2px inset grey;
+}
+
 #user{
 	position: absolute;
 	display: inline-block;
@@ -55,7 +60,6 @@ html, body {
 	border: 1px outset black;
 	background-color: grey;
 	color: black;
-	padding: 3px;
 	position: absolute;
 	right: 5%;
 	top: 5%;
@@ -65,7 +69,12 @@ html, body {
 
 #userOptions p{
 	margin: 0px;
+	padding: 5px;
+	border-bottom: 1px solid black;
 	cursor: pointer;
+}
+#userOptions p:hover{
+	background-color: white;
 }
 
 #createEvent{
@@ -259,6 +268,47 @@ html, body {
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+}
+
+#Fpeople{
+	color: blue;
+	margin: 2%;
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#FlistPeople{
+	position: absolute;
+	width: 20%;
+	height: 70%;
+	top: 25%;
+	left: 60%;
+	background-color: grey;
+	color: black;
+	font-weight: bold;
+	border: 3px outset orange;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+#FlistPeople p{
+	margin-left: 10%;
+}
+
+#FlistPeople #listTitle{
+	color: orange;
+	text-decoration: underline;
+	text-align: center;
+	margin-left: 0%;
+}
+
+#closeList{
+	position: absolute;
+	top:24%;
+	left:79%;
+	display: none;
+	z-index: 2;
 }
 
 .editEvent{

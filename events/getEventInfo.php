@@ -32,6 +32,8 @@
 
   $line['type'] = getEventType($line['name']);
   $line['attend'] = Attend($line['name']);
+  $line['people'] = getUsersAttendingEvent($line['name']);
+  $line['Npeople'] = count($line['people']);
 
 
   echo json_encode($line);
