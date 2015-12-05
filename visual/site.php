@@ -42,6 +42,8 @@
 			<form action="/" name="createEventForm" id="createEventForm" method="post">
 				<input type="text" placeholder="name" name="name"><br>
 				<input type="date" placeholder="date" name="dateBegin"><br>
+				<input type="time" placeholder="time" name="time"><br>
+				<input type="text" placeholder="type" name="type"><br>
 				<input type="text" placeholder="location" name="location"><br>
 				<input type="text" placeholder="description" name="description"><br>
 				<input type="text" placeholder="image URL" name="image"><br>
@@ -59,12 +61,16 @@
 			 			$line = getLine($table, $i);
 			 			$name = $line['name'];
 			 			$date = $line['dateBegin'];
+			 			$time = $line['time'];
+			 			$type = getEventType($name);
 			 			$location = $line['location'];
 			 			$image = $line["image"];
 						echo '<div id='.$i.' class="listEvents"> ';
 							echo '<div class="eventResume">';
 								echo '<div class="title">'.$name.'<br></div>';
 					 			echo '<div class="date">'.$date.'<br></div>';
+					 			echo '<div class="time">'.$time.'<br></div>';
+					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -81,6 +87,8 @@
 				 		$line = getLine($table, 0);
 				 		$name = $line['name'];
 			 			$date = $line['dateBegin'];
+			 			$time = $line['time'];
+			 			$type = getEventType($name);
 			 			$location = $line['location'];
 			 			$image = $line["image"];
 			 			$description = $line['description'];
@@ -88,6 +96,8 @@
 				 		echo '<div class="EventsInfo"> ';
 				 				echo '<div class="Ftitle"> '.$name.'<br></div>';
 					 			echo '<div class="Fdate">'.$date.'<br></div>';
+					 			echo '<div class="Ftime">'.$time.'<br></div>';
+					 			echo '<div class="Ftype">'.$type.'<br></div>';
 					 			echo '<div class="Flocation">'.$location.'<br></div>';
 
 

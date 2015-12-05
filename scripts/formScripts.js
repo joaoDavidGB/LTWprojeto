@@ -116,6 +116,8 @@ $("document").ready(function(){
 		var success = false;
 		var name = document.forms["createEventForm"]["name"].value;
 		var date = document.forms["createEventForm"]["dateBegin"].value;
+		var time = document.forms["createEventForm"]["time"].value;
+		var type = document.forms["createEventForm"]["type"].value;
 		var location2 = document.forms["createEventForm"]["location"].value;
 		var description = document.forms["createEventForm"]["description"].value;
 		var image = document.forms["createEventForm"]["image"].value;
@@ -132,6 +134,8 @@ $("document").ready(function(){
 			{
 				'name' : name,
 				'date' : date,
+				'time' : time,
+				'type' : type,
 				'location' : location2,
 				'description' : description,
 				'image' : image

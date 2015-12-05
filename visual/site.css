@@ -233,6 +233,17 @@ html, body {
 	text-align: center;
 	font-style: italic;
 }
+
+#eventInfo .Ftime{
+	text-align: center;
+	font-style: italic;
+}
+
+#eventInfo .Ftype{
+	text-align: center;
+	font-style: italic;
+}
+
 #eventInfo .Flocation{
 	text-align: center;
 }

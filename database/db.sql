@@ -16,6 +16,7 @@ CREATE TABLE Event(
 idEvent INTEGER PRIMARY KEY,
 name VARCHAR UNIQUE,
 dateBegin DATE,
+time TIME,
 description VARCHAR NOT NULL,
 location VARCHAR NOT NULL,
 image VARCHAR NOT NULL

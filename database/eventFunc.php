@@ -1,7 +1,7 @@
 <?php
 include_once('connection.php');
 
-function createEvent($name, $dateBegin ,$description, $location, $image){
+function createEvent($name, $dateBegin, $time, $type, $description, $location, $image){
 	global $db;
 	session_start();
 
@@ -14,10 +14,11 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 		return false;
 	}
 
-	$stmt = $db->prepare('INSERT INTO Event(name,dateBegin,description, location, image)
-						values(:name, :dateBegin, :description, :location, :image)');
+	$stmt = $db->prepare('INSERT INTO Event(name,dateBegin,time,description, location, image)
+						values(:name, :dateBegin, :time, :description, :location, :image)');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':dateBegin', $dateBegin, PDO::PARAM_STR);
+	$stmt->bindParam(':time', $time, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
 	$stmt->bindParam(':location', $location, PDO::PARAM_STR);
 	$stmt->bindParam(':image', $image, PDO::PARAM_STR);
@@ -36,6 +37,10 @@ function createEvent($name, $dateBegin ,$description, $location, $image){
 	$idUser = $stmt->fetch();
 	$idUser = $idUser['idUser'];
 	
+	$stmt = $db->prepare('INSERT INTO EventType(idEvent,type) VALUES (:idEvent,:type)');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
+	$stmt->execute();
 
 	$stmt = $db->prepare('INSERT INTO AdminEvent(idUser,idEvent) VALUES (:idUser,:idEvent)');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -344,6 +349,27 @@ function getUsername($idUser){
     $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->execute();
     return $stmt->fetch();
+}
+
+
+function getEventType($name){
+	global $db;
+
+	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
+	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+	$stmt->execute();
+	$idEvent = $stmt->fetch();
+
+	if(!(count($idEvent))===1){
+		return false;
+	}
+
+	$stmt = $db->prepare('SELECT type FROM EventType WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+    $result = $stmt->fetch();
+    return $result['type'];
+
 }
 
 ?>
