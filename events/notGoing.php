@@ -3,7 +3,7 @@
   
 
   try {
-    $event = willAttend($_POST['name']);
+    $event = stopAttend($_POST['name']);
     if ($event === false){
       echo "fail";
     }

@@ -12,13 +12,13 @@ else if($redirect === 'home')
 
 switch($redirect) {
 		case 'home':
-			include('PHP/home.php');
+			include('visual/home.php');
 			break;
 		case 'site':
-			include('PHP/site.php');
+			include('visual/site.php');
 			break;
 		default:
-			include('PHP/home.php');
+			include('visual/home.php');
 			break;
 	}
 ?>

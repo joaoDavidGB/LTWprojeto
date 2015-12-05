@@ -3,11 +3,14 @@
 	
   include_once('../database/eventFunc.php'); 
   session_start();
-  
+    
+  //recebe todas as informções do evento presentes na table Event
   $table = getAllEvents();
   $line = getLine($table, $_POST['id']);
-  $line['host'] = getEventAdmin($line['name'])['username'];
+  
 
+  //verifica quem é o admin do evento.
+  $line['host'] = getEventAdmin($line['name'])['username'];
   if ($line['host'] == $_SESSION['username']){
   	$line['host'] = "Delete Event";
   }
@@ -15,6 +18,7 @@
   	$line['host'] = "host: ".$line['host'];
   }
 
+  //inclui todos os comentários em $line['ArrayCom']
   $tableCom = getCommentsFromEvent($line['name']);
   $maxCom = sizeof($tableCom);
   $line['tableCom'] = $tableCom;
