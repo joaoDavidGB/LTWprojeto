@@ -112,9 +112,11 @@
 					 				$admin = getEventAdmin($name)['username'];
 					 				if ($admin != $_SESSION['username']){
 					 					echo '<div class="hostName">host: '.$admin.'</div>';
+					 					echo '<div class="editEvent" style="display: none;">Edit Event</div>';
 					 					echo '<div class="deleteEvent" style="display: none;">Delete Event</div>';
 					 				}
 					 				else{
+					 					echo '<div class="editEvent">Edit Event</div>';
 					 					echo '<div class="deleteEvent">Delete Event</div>';
 					 					echo '<div class="hostName" style="display: none;">host: '.$admin.'</div>';
 					 				}
@@ -130,7 +132,7 @@
 					 			echo '</div>';
 
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
-					 			echo '<div class="FeventImage"><img src="'.$image.'" alt="eventImage"/></div>';
+					 			echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
 								
 
 
@@ -162,9 +164,26 @@
 									}
 								echo '</div>';
 
+
+
 							echo '</div>';
 					}
 				?>
+			</div>
+			<div id="editEvent" style="display: none;">
+				<h1>Edit Event</h1>
+				<form action="/" name="editEventForm" id="editEventForm" method="post">
+					<input type="text" value="" name="tituloAntigo" style="display:none;">
+					<input type="text" value="" name="titulo"><br>
+					<input type="date" value="" name="dateBegin"><br>
+					<input type="time" value="" name="time"><br>
+					<input type="text" value="" name="type"><br>
+					<input type="text" value="" name="location"><br>
+					<input type="text" value="" name="description"><br>
+					<input type="text" value="" name="image"><br>
+					<input id="subEditEvent" type="submit" value="Submit Event">
+				</form>
+				<button id="closeEdit">Cancel</button>
 			</div>
 	</body>
 </html>

@@ -58,20 +58,26 @@ function createEvent($name, $dateBegin, $time, $type, $description, $location, $
 function editEvent($idEvent,$name, $dateBegin, $time, $type, $description, $location, $image){
 	global $db;
 
-	$stmt = $db->prepare('UPDATE Event SET name:=name, dateBegin=:dateBegin, time=:time,type:type,
-		description=:description, location=:location,image=:image WHERE idEvent=:idEvent');
+	$stmt = $db->prepare('UPDATE Event SET name=:name, dateBegin=:dateBegin, time=:time, description=:description, location=:location,image=:image WHERE idEvent=:idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':dateBegin', $dateBegin, PDO::PARAM_STR);
 	$stmt->bindParam(':time', $time, PDO::PARAM_STR);
-	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
 	$stmt->bindParam(':location', $location, PDO::PARAM_STR);
 	$stmt->bindParam(':image', $image, PDO::PARAM_STR);
 
-	$stmt->execute();
-	return true;
+	$result = $stmt->execute();
+	
+	if (!$result)
+		return false;
 
+	$stmt = $db->prepare('INSERT INTO EventType(idEvent,type) VALUES (:idEvent,:type)');
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
+	$stmt->execute();
+
+	return true;
 }
 
 function deleteEvent($name){

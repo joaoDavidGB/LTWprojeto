@@ -261,7 +261,7 @@ html, body {
   text-decoration: none;
 }
 
-.deleteEvent{
+.editEvent{
 	position: relative;
 	margin: auto;
 	width: 12%;
@@ -269,6 +269,17 @@ html, body {
 	border: 3px outset grey;
 	background-color: orange;
 	color: black;
+	margin-bottom: 10px;
+}
+
+.deleteEvent{
+	position: relative;
+	margin: auto;
+	width: 12%;
+	cursor: pointer;
+	border: 3px outset grey;
+	background-color: red;
+	color: white;
 }
 
 #eventInfo .Ftitle{
@@ -347,4 +358,61 @@ html, body {
 	margin-bottom: 2%;
 	margin-left: 1%;
 }
-    
+
+#editEvent{
+	position: absolute;
+	width: 37%;
+	height: 80%;
+	top: 10%;
+	left: 1%;
+	background-color: white;
+	z-index: 1;
+	display: none;
+
+	border: 2px outset grey;
+	padding: 1%;
+	padding-top: 1.8%;
+	text-align: center;
+	background-image: url(../images/createEve.jpg);
+}
+
+#editEvent h1{
+	color: black;
+}
+
+#editEvent input {
+	padding:5px;
+	border:1px solid #ccc;
+	font-size:16px;
+	font-family:raleway;
+	margin-bottom: 5px;
+	width:70%;
+} 
+
+#editEvent input[type=submit] {
+	text-decoration:none;
+	width:50%;
+	font-weight: bold;
+	text-align:center;
+	background-color:#FFBC00;
+	color:black;
+	border:1px solid #FFCB00;
+	padding:10px 0;
+	font-size:20px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+#editEvent #closeEdit{
+	margin-top: 5%;
+	text-decoration:none;
+	width:50%;
+	text-align:center;
+	background-color:#FFBC00;
+	color:black;
+	border:1px solid #FFCB00;
+	padding:10px 0;
+	font-size:20px;
+	cursor:pointer;
+	border-radius:5px;
+}

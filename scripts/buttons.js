@@ -34,6 +34,7 @@ $("document").ready(function(){
             //alteração da informação do host
             //no caso de ser o proprio user, aparece um botão para dar delete ao evento
             if (host == "Delete Event"){
+                $( ".editEvent").show();
                 $( ".deleteEvent").text( host);
                 $( ".deleteEvent").show();
                 $( ".hostName").hide();
@@ -42,8 +43,10 @@ $("document").ready(function(){
                 $( ".hostName").text(host);
                 $( ".hostName").show();
                 $( ".deleteEvent").hide();
+                $( ".editEvent").hide();
             }
 
+            //se for mostra o going a preto e o not going aberto, se não for o oposto
             if(go){
                 $( ".FgoingT").show();
                 $( ".FgoingF").hide();
@@ -54,6 +57,14 @@ $("document").ready(function(){
                 $( ".FgoingT").hide();
                 $( ".FgoingF").show();
                 $( ".FstopT").show();
+                $( ".FstopF").hide();
+            }
+
+            //se for host não aparece as opções going/not going
+            if (host == "Delete Event"){
+                $( ".FgoingT").hide();
+                $( ".FgoingF").hide();
+                $( ".FstopT").hide();
                 $( ".FstopF").hide();
             }
             
@@ -71,10 +82,16 @@ $("document").ready(function(){
             var ComentaryArray = data['ArrayCom'];
             $(".FcomUser").remove();
             $(".FcomBody").remove();
-            //se não houver comentários, dá replace com divs vazios
-            for(var j = 0; j < maxCom; j++){
-                $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
-                $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+            //apenas mostra os comentarios se o utilizador for ao evento
+            if (go){
+                 $("#Fcomments").show();
+                for(var j = 0; j < maxCom; j++){
+                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+                }
+            }
+            else{
+                $("#Fcomments").hide();
             }
 
             $("#eventInfo").show( "slow");
@@ -114,6 +131,10 @@ $("document").ready(function(){
 
     $( ".deleteEvent" ).click(function(e) {
         var name = ($(".Ftitle").text());
+
+        var sure = confirm("Are you sure you want to delete this event?");
+        if(!sure)
+            return false;
         
          $.post(
         'events/deleteEvent.php',
@@ -190,6 +211,70 @@ $("document").ready(function(){
     });
 
 
+    $( ".editEvent").click(function(){
+
+        var eventID;
+        var name = $( ".Ftitle").text();
+
+        $.post(
+        'events/search.php',
+        {
+            'name' : name
+        },
+        function(data) {
+            if (data == "fail"){
+                return false;
+            }
+            else{
+                eventID = data;
+                $.post(
+                'events/getEventInfo.php',
+                {
+                    'id' : eventID
+                },
+                function(data) {
+                    data=JSON.parse(data);
+                    var host = data['host'];
+
+                    if (host != "Delete Event"){
+                        return false;
+                    }
+
+                    var date = data['dateBegin'];
+                    var local = data['location'];
+                    var description = data['description'];
+                    var image = data['image'];
+                    var tableCom = data['tableCom'];
+                    var maxCom = data['maxCom'];
+                    var timeH = data['time'];
+                    var type = data['type'];
+
+
+                    $( "#editEvent input[name=tituloAntigo]").val(name);
+                    $( "#editEvent input[name=titulo]").val(name);
+                    $( "#editEvent input[name=dateBegin]").val(date);
+                    $( "#editEvent input[name=time]").val(timeH);
+                    $( "#editEvent input[name=type]").val(type);
+                    $( "#editEvent input[name=location]").val(local);
+                    $( "#editEvent input[name=description]").val(description);
+                    $( "#editEvent input[name=image]").val(image);
+
+                    $( "#editEvent").toggle();
+
+                }).fail(function(error) {
+                        return false;
+                }); 
+            }   
+        }).fail(function(error) {
+                        return false;
+        });   
+
+    });
+
+    $( "#closeEdit").click(function(){
+        $("#editEvent").hide();
+
+    });
 })
 
     

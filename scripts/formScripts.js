@@ -314,4 +314,56 @@ $("document").ready(function(){
 
 	});
 
+	
+	$("#editEventForm").submit(function(ev){
+		ev.preventDefault();
+
+		var nameAntigo = document.forms["editEventForm"]["tituloAntigo"].value;
+		var name = document.forms["editEventForm"]["titulo"].value;
+		var date = document.forms["editEventForm"]["dateBegin"].value;
+		var timeH = document.forms["editEventForm"]["time"].value;
+		var type = document.forms["editEventForm"]["type"].value;
+		var local = document.forms["editEventForm"]["location"].value;
+		var description = document.forms["editEventForm"]["description"].value;
+		var image = document.forms["editEventForm"]["image"].value;
+
+		//verifica se o texto foi preenchido
+		if (name == "" || date == "" || timeH == "" || type == "" || local == "" || description == "" || image == "") {
+			alert("you didn't fill every field");
+			return false;
+		};
+
+		$("#editEvent").hide();
+
+		
+		$.post(
+        'events/editEvent.php',
+        {
+        	'antigoNome' : nameAntigo,
+            'name' : name,
+            'date' : date,
+            'timeH' : timeH,
+            'type' : type,
+            'local' : local,
+            'description' : description,
+            'image' : image
+        },
+        function(data) {
+        	switch(data){
+        		case 'fail':
+        		alert("failed to edit the event");
+        		break;
+        		case 'success':
+        		location.reload();
+        		break;
+        		default:
+        		alert(data);
+        		break;
+        	}
+
+        }).fail(function(error) {
+                return false;
+        });  
+
+	});
 })
