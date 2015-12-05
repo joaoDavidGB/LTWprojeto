@@ -30,6 +30,9 @@
     array_push($line['ArrayCom'], $comUser['username'], $lineCom['commentary']);
   }
 
+  $line['type'] = getEventType($line['name']);
+  $line['attend'] = Attend($line['name']);
+
 
   echo json_encode($line);
 ?>

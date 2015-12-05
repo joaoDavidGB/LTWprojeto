@@ -26,6 +26,10 @@ $("document").ready(function(){
             var host = data['host'];
             var tableCom = data['tableCom'];
             var maxCom = data['maxCom'];
+            var timeH = data['time'];
+            var type = data['type'];
+
+            var go = data['attend'];
 
             //alteração da informação do host
             //no caso de ser o proprio user, aparece um botão para dar delete ao evento
@@ -39,10 +43,25 @@ $("document").ready(function(){
                 $( ".hostName").show();
                 $( ".deleteEvent").hide();
             }
+
+            if(go){
+                $( ".FgoingT").show();
+                $( ".FgoingF").hide();
+                $( ".FstopT").hide();
+                $( ".FstopF").show();
+            }
+            else{
+                $( ".FgoingT").hide();
+                $( ".FgoingF").show();
+                $( ".FstopT").show();
+                $( ".FstopF").hide();
+            }
             
             //alteração de informação genérica
             $( ".Ftitle" ).text( name);
             $( ".Fdate" ).text( date);
+            $( ".Ftime").text( timeH);
+            $( ".Ftype").text(type);
             $( ".Flocation" ).text( local);
             $( ".Fdescription" ).text( description);
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
@@ -118,6 +137,56 @@ $("document").ready(function(){
                 return false;
         }); 
                 
+    });
+
+    $( ".FstopF" ).click(function(e) {
+        var name = ($(".Ftitle").text());
+
+        $.post(
+        'events/notGoing.php',
+        {
+            'name' : name
+        },
+        function(data) {
+            switch(data) {
+                case 'fail':
+                    location.reload();
+                    break;
+                case 'success':
+                    location.reload();
+                    break;
+                default:
+                    alert(data);
+                    break;
+                        }
+        }).fail(function(error) {
+                return false;
+        }); 
+    });
+
+    $( ".FgoingF" ).click(function(e) {
+        var name = ($(".Ftitle").text());
+
+        $.post(
+        'events/going.php',
+        {
+            'name' : name
+        },
+        function(data) {
+            switch(data) {
+                case 'fail':
+                    location.reload();
+                    break;
+                case 'success':
+                    location.reload();
+                    break;
+                default:
+                    alert(data);
+                    break;
+                        }
+        }).fail(function(error) {
+                return false;
+        }); 
     });
 
 

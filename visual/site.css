@@ -65,9 +65,9 @@ html, body {
 #createEvent{
 	position: absolute;
 	width: 50%;
-	height: 50%;
-	left: 15%;
-	top: 25%;
+	height: 70%;
+	left: 25%;
+	top: 15%;
 	background-color: white;
 	z-index: 1;
 	display: none;
@@ -76,7 +76,7 @@ html, body {
 	padding: 1%;
 	padding-top: 1.8%;
 	text-align: center;
-	background-image: url(../images/20016.jpg);
+	background-image: url(../images/createEve.jpg);
 }
 
 #createEvent h1{
@@ -159,7 +159,7 @@ html, body {
 }
 
 .eventResume{
-	margin: 5%;
+	margin: 1%;
 	float: right;
 	text-align: center;
 }
@@ -209,6 +209,50 @@ html, body {
 #eventInfo .Fhost{
 	margin-top: 2%;
 	text-align: center;
+}
+
+.Fmypres {
+	width: 20%;
+}
+
+.FstopF, .FgoingF {
+  background: #f59403;
+  background-image: -webkit-linear-gradient(top, #f59403, #b85c2b);
+  background-image: -moz-linear-gradient(top, #f59403, #b85c2b);
+  background-image: -ms-linear-gradient(top, #f59403, #b85c2b);
+  background-image: -o-linear-gradient(top, #f59403, #b85c2b);
+  background-image: linear-gradient(to bottom, #f59403, #b85c2b);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.FstopF:hover, .FgoingF:hover {
+  background: #fc3c3c;
+  background-image: -webkit-linear-gradient(top, #fc3c3c, #b83333);
+  background-image: -moz-linear-gradient(top, #fc3c3c, #b83333);
+  background-image: -ms-linear-gradient(top, #fc3c3c, #b83333);
+  background-image: -o-linear-gradient(top, #fc3c3c, #b83333);
+  background-image: linear-gradient(to bottom, #fc3c3c, #b83333);
+  text-decoration: none;
+}
+
+.FstopT, .FgoingT {
+  background: #f59403;
+  background-color: black;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
 }
 
 .deleteEvent{
@@ -293,6 +337,7 @@ html, body {
 }
 
 .FcomBody{
+	border: 1px solid grey;
 	margin-bottom: 2%;
 	margin-left: 1%;
 }

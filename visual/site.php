@@ -114,6 +114,15 @@
 					 				}
 					 			echo '</div>';
 
+					 			echo '<div class="Fpresence">';
+					 				echo '<div class="Fmypres">';
+					 						echo '<div class="FgoingT">Going</div>';
+					 						echo '<div class="FstopF">Not Going</div>';
+					 						echo '<div class="FgoingF">Going</div>';
+					 						echo '<div class="FstopT">Not Going</div>';
+					 				echo '</div>';
+					 			echo '</div>';
+
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
 					 			echo '<div class="FeventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 								
