@@ -60,7 +60,7 @@
 			<div id="eventList">
 			 	<?
 			 		include('database/eventFunc.php');
-			 		$table = getAllEvents();
+			 		$table = getEventSortedbyDate();
 			 		$max = sizeof($table);
 			 		for($i = 0; $i < $max; $i++){
 			 			$line = getLine($table, $i);
@@ -87,7 +87,7 @@
 			<!-- div com a informação do evento selecionado. Lado direito da pagina -->
 			<div id="eventInfo"  style="display:none";>
 				<?
-			 		$table = getAllEvents();
+			 		$table = getEventSortedbyDate();
 			 		$max = sizeof($table);
 			 		if ($max != 0){
 				 		$line = getLine($table, 0);

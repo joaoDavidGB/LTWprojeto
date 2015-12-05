@@ -426,4 +426,13 @@ function getEventfromID($idEvent){
 		return $Event;
 }
 
+
+function getEventSortedbyDate(){
+	global $db;
+
+	$stmt = $db->prepare('SELECT * FROM Event ORDER BY DATE(dateBegin), TIME(time)');
+	$stmt->execute();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
