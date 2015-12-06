@@ -516,9 +516,7 @@ function invite($idUser, $idEvent){
 	$stmt = $db->prepare('INSERT INTO Invite(idUser, idEvent) values(:idUser, :idEvent)');
 	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
-	$stmt->execute();
-
-	return $stmt;
+	return $stmt->execute();
 }
 
 function getInvitedEvents($idUser){
@@ -535,15 +533,6 @@ function getInvitedEvents($idUser){
 	return $result;
 
 	
-}
-
-function getUserID($username){
-	global $db;
-
-	$stmt = $db->prepare('SELECT idUser FROM User WHERE username = :name');
-	$stmt->bindParam(':name', $username, PDO::PARAM_STR);
-	$stmt->execute();
-	return $stmt->fetch()['idUser'];
 }
 
 ?>

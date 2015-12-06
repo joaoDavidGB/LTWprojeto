@@ -142,9 +142,13 @@
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
-					 			if($privateEvent === 0)
-					 			echo '<div class="privateEvent">Private<br></div>';
-								else echo '<div class="privateEvent">Public<br></div>';	
+					 			echo '<div class="privateEvent">';
+					 			if($privateEvent === 0){
+					 				echo 'Private';
+					 			}
+					 			else
+					 				echo 'Public';
+					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 						echo '</div>';
@@ -176,9 +180,13 @@
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
-					 			if($privateEvent === 0)
-					 			echo '<div class="privateEvent">Private<br></div>';
-								else echo '<div class="privateEvent">Public<br></div>';	
+					 			echo '<div class="privateEvent">';
+					 			if($privateEvent === 0){
+					 				echo 'Private';
+					 			}
+					 			else
+					 				echo 'Public';
+					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 						echo '</div>';
@@ -209,20 +217,30 @@
 					 			echo '<div class="Ftime">'.$time.'<br></div>';
 					 			echo '<div class="Ftype">'.$type.'<br></div>';
 					 			echo '<div class="Flocation">'.$location.'<br></div>';
-								if($privateEvent === 0)
-					 			echo '<div class="FprivateEvent">Private<br></div>';
-								else echo '<div class="FprivateEvent">Public<br></div>';
+								echo '<div class="privateEvent">';
+					 			if($privateEvent === 0){
+					 				echo 'Private';
+					 			}
+					 			else
+					 				echo 'Public';
+					 			echo '<br></div>';
 					 			echo '<div class="Fhost">';
 					 			$admin = getEventAdmin($name)['username'];
 					 				if ($admin != $_SESSION['username']){
 					 					echo '<div class="hostName">host: '.$admin.'</div>';
 					 					echo '<div class="editEvent" style="display: none;">Edit Event</div>';
 					 					echo '<div class="deleteEvent" style="display: none;">Delete Event</div>';
+					 					echo '<form action="/" name="inviteP" id="inviteP" method="post" style="display:none;">
+												<input type="text" placeholder="Invite someone" name="username">
+												</form>';
 					 				}
 					 				else{
 					 					echo '<div class="editEvent">Edit Event</div>';
 					 					echo '<div class="deleteEvent">Delete Event</div>';
 					 					echo '<div class="hostName" style="display: none;">host: '.$admin.'</div>';
+					 					echo '<form action="/" name="inviteP" id="inviteP" method="post">
+												<input type="text" placeholder="Invite someone" name="username">
+												</form>';
 					 				}
 					 			echo '</div>';
 

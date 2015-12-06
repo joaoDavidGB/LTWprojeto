@@ -15,6 +15,9 @@
       $_SESSION['username'] = $_POST['username'];
       echo "login_true";
     }
+    else{
+      echo "ok";
+    }
   } catch (PDOException $e) {
     die($e->getMessage());
   }

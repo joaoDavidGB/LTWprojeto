@@ -31,6 +31,7 @@ $("document").ready(function(){
             var type = data['type'];
             var people = data['people'];
             var numberPeople = data['Npeople'];
+            var Fprivate = data['privateEvent'];
             
 
             var go = data['attend'];
@@ -42,12 +43,14 @@ $("document").ready(function(){
                 $( ".deleteEvent").text( host);
                 $( ".deleteEvent").show();
                 $( ".hostName").hide();
+                $( "#inviteP").show();
             }
             else{
                 $( ".hostName").text(host);
                 $( ".hostName").show();
                 $( ".deleteEvent").hide();
                 $( ".editEvent").hide();
+                $( "#inviteP").hide();
             }
 
             //se for mostra o going a preto e o not going aberto, se não for o oposto
@@ -89,6 +92,12 @@ $("document").ready(function(){
             $( ".Flocation" ).text( local);
             $( ".Fdescription" ).text( description);
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
+
+            if(Fprivate == 0){
+                $(".privateEvent").text("Private");
+            }
+            else
+                $(".privateEvent").text("Public");
             
             //codigo para alteração de comentarios a apresentar
             //array com informação relativa aos comentarios

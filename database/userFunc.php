@@ -137,8 +137,8 @@ function existUser($username) {
     $stmt = $db->prepare('SELECT * FROM User WHERE username = :user');
     $stmt->bindParam(':user', $username, PDO::PARAM_STR);
 	$stmt->execute();
-    $result = $stmt->fetch();
-	if (!(count($result) === 0)) {
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($result) === 0) {
 		return false;
 	}
 	return true;
@@ -153,6 +153,15 @@ function generateHash($password) {
 
 function verify($password, $hashedPassword) {
     return crypt($password, $hashedPassword) == $hashedPassword;
+}
+
+function getUserID($username){
+	global $db;
+
+	$stmt = $db->prepare('SELECT idUser FROM User WHERE username = :name');
+	$stmt->bindParam(':name', $username, PDO::PARAM_STR);
+	$stmt->execute();
+	return $stmt->fetch()['idUser'];
 }
 
 

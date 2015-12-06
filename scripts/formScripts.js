@@ -28,7 +28,7 @@ $("document").ready(function(){
 					location.href='index.php?redirect=site';
 					break;
 					default:
-					alert("Error while processing the login...");
+					alert("Error while processing the login..." + data);
 
 					break;
 				}
@@ -251,20 +251,27 @@ $("document").ready(function(){
 		            var maxCom = data['maxCom'];
 		            var timeH = data['time'];
 		            var type = data['type'];
+		            var people = data['people'];
+            		var numberPeople = data['Npeople'];
+		            var Fprivate = data['privateEvent'];
 
 		            var go = data['attend'];
 
 		            //alteração da informação do host
 		            //no caso de ser o proprio user, aparece um botão para dar delete ao evento
 		            if (host == "Delete Event"){
+		                $( ".editEvent").show();
 		                $( ".deleteEvent").text( host);
 		                $( ".deleteEvent").show();
 		                $( ".hostName").hide();
+		                $( "#inviteP").show();
 		            }
 		            else{
 		                $( ".hostName").text(host);
 		                $( ".hostName").show();
 		                $( ".deleteEvent").hide();
+		                $( ".editEvent").hide();
+		                $( "#inviteP").hide();
 		            }
 
 		            if(go){
@@ -279,6 +286,23 @@ $("document").ready(function(){
 		                $( ".FstopT").show();
 		                $( ".FstopF").hide();
 		            }
+
+		            //se for host não aparece as opções going/not going
+		            if (host == "Delete Event"){
+		                $( ".FgoingT").hide();
+		                $( ".FgoingF").hide();
+		                $( ".FstopT").hide();
+		                $( ".FstopF").hide();
+		            }
+
+		            $("#Fpeople").text(numberPeople + " people going.");
+		            $("#FlistPeople").hide();
+		            $("#FlistPeople").empty();
+		            $("#FlistPeople").append('<p id="listTitle">List of people</p>');
+		            for(var i = 0; i < numberPeople; i++){
+		                var person = people[i]['username'];
+		                $("#FlistPeople").append('<p>'+person+'</p>');
+		            }
 		            
 		            //alteração de informação genérica
 		            $( ".Ftitle" ).text( name);
@@ -289,16 +313,28 @@ $("document").ready(function(){
 		            $( ".Fdescription" ).text( description);
    		            $( ".FprivateEvent" ).text( local);
 		            $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
+
+		            if(Fprivate == 0){
+		                $(".privateEvent").text("Private");
+		            }
+		            else
+		                $(".privateEvent").text("Public");
 		            
 		            //codigo para alteração de comentarios a apresentar
 		            //array com informação relativa aos comentarios
 		            var ComentaryArray = data['ArrayCom'];
 		            $(".FcomUser").remove();
 		            $(".FcomBody").remove();
-		            //se não houver comentários, dá replace com divs vazios
-		            for(var j = 0; j < maxCom; j++){
-		                $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
-		                $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+		            //apenas mostra os comentarios se o utilizador for ao evento
+		            if (go){
+		                 $("#Fcomments").show();
+		                for(var j = 0; j < maxCom; j++){
+		                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+		                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+		                }
+		            }
+		            else{
+		                $("#Fcomments").hide();
 		            }
 
 		            $("#eventInfo").show( "slow");
@@ -479,6 +515,46 @@ $("document").ready(function(){
 		        }).fail(function(error) {
 		                return false;
 		        }); 
+        		break;
+        		default:
+        		alert(data);
+        		break;
+        	}
+
+        }).fail(function(error) {
+                return false;
+        });  
+
+	});
+
+	$("#inviteP").submit(function(ev){
+		ev.preventDefault();
+
+		var name = document.forms["inviteP"]["username"].value;
+		var evento = $(".Ftitle").text();
+		//verifica se o texto foi preenchido
+		if (name == "") {
+			return false;
+		};
+
+		var eventID;
+
+		$.post(
+        'accounts/invite.php',
+        {
+            'name' : name,
+            'evento' : evento
+        },
+        function(data) {
+        	switch(data){
+        		case 'user_not_exit':
+        		alert(name + " does not exist!");
+        		break;
+        		case 'fail':
+        		alert("fail");
+        		break;
+        		case 'success':
+        		alert(name + " invited successfully");
         		break;
         		default:
         		alert(data);
