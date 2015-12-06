@@ -213,9 +213,17 @@
 
 				 		echo '<div class="EventsInfo"> ';
 				 				echo '<div class="Ftitle"> '.$name.'<br></div>';
+<<<<<<< HEAD
 					 			echo '<div class="FdateTime">'.$date.'<p>'.$time.'<br></div>';
 					 			echo '<div class="FTypeLocation">Location:'.$location.' Event Type:'.$type.' <br></div>';
 								echo '<div class="FprivateEvent">';
+=======
+					 			echo '<div class="Fdate">'.$date.'<br></div>';
+					 			echo '<div class="Ftime">'.$time.'<br></div>';
+					 			echo '<div class="Ftype">'.$type.'<br></div>';
+					 			echo '<div class="Flocation">'.$location.'<br></div>';
+								echo '<div class="privateEvent">';
+>>>>>>> 0edbc3c67b6bd679cb4a0a355a27b32c567a473f
 					 			if($privateEvent == 0){
 					 				echo 'Private';
 					 			}
