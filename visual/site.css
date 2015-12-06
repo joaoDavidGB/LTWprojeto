@@ -166,7 +166,6 @@ html, body {
 	float: left;
 	width: 40%; 
 	height: 90%; 
-	border-right: 1px outset white;
 }
 
 #EventTab{
@@ -222,9 +221,10 @@ html, body {
 
 .listEvents{
 	border: 2px outset grey;
-	height: 21%;
+	height: 120px;
 	cursor: pointer;
 }
+
 
 .listEvents .title{
 	color: orange;
@@ -242,13 +242,13 @@ html, body {
 .eventResume{
 	margin: 1%;
 	float: right;
-	text-align: center;
+	text-align: right;
 }
 
 #eventList .eventImage img{
+	height:120px;
+	width:120px;
 	margin-left: 2%;
-	max-height: 120px;
-	max-width: 120px;
 }
 
 #eventInfo{
@@ -294,6 +294,7 @@ html, body {
 
 .Fmypres {
 	width: 20%;
+	cursor:pointer;
 }
 
 .FstopF, .FgoingF {
