@@ -355,11 +355,15 @@ $("document").ready(function(){
 		            var ComentaryArray = data['ArrayCom'];
 		            $(".FcomUser").remove();
 		            $(".FcomBody").remove();
+		            $(".deleteComment").remove();
 		            //apenas mostra os comentarios se o utilizador for ao evento
 		            if (go){
 		                 $("#Fcomments").show();
 		                for(var j = 0; j < maxCom; j++){
 		                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+		                    if(host == "Delete Event" || data['session'] == ComentaryArray[2*j]){
+		                         $("#Fcomments").append('<div id="deleteComment'+j+'" class="deleteComment" >delete</div>');
+		                    }
 		                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
 		                }
 		            }

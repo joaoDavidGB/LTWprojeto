@@ -34,6 +34,7 @@
   $line['attend'] = Attend($line['name']);
   $line['people'] = getUsersAttendingEvent($line['name']);
   $line['Npeople'] = count($line['people']);
+  $line['session'] = $_SESSION['username'];
 
 
   echo json_encode($line);

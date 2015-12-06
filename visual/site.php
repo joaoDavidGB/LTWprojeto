@@ -53,7 +53,7 @@
 			for($i = 0; $i < $Nevents ; $i++){
 				$event = $events[$i]['idEvent'];
 				$nameEvent = getEventfromID($event)['name'];
-				echo '<p>'.$nameEvent.'</p>';
+				echo '<p id="attend'.$event.'" class="attendName">'.$nameEvent.'</p>';
 			}
 			echo '</div>';
 			echo '<button id="closeEventsAttending">X</button>';
@@ -141,13 +141,13 @@
 					 			echo '<div class="date">'.$date.'<br></div>';
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
-					 			echo '<div class="location">'.$location.'<br></div>';
+					 			echo '<div class="location">Location:'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
 					 			if($privateEvent == 0){
-					 				echo 'Private';
+					 				echo 'Public';
 					 			}
 					 			else
-					 				echo 'Public';
+					 				echo 'Private';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -182,10 +182,10 @@
 					 			echo '<div class="location">Location:'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
 					 			if($privateEvent == 0){
-					 				echo 'Private';
+					 				echo 'Public';
 					 			}
 					 			else
-					 				echo 'Public';
+					 				echo 'Private';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -213,22 +213,16 @@
 
 				 		echo '<div class="EventsInfo"> ';
 				 				echo '<div class="Ftitle"> '.$name.'<br></div>';
-<<<<<<< HEAD
-					 			echo '<div class="FdateTime">'.$date.'<p>'.$time.'<br></div>';
+
+					 			echo '<div class="FdateTime">'.$date.'<br>'.$time.'<br></div>';
 					 			echo '<div class="FTypeLocation">Location:'.$location.' Event Type:'.$type.' <br></div>';
 								echo '<div class="FprivateEvent">';
-=======
-					 			echo '<div class="Fdate">'.$date.'<br></div>';
-					 			echo '<div class="Ftime">'.$time.'<br></div>';
-					 			echo '<div class="Ftype">'.$type.'<br></div>';
-					 			echo '<div class="Flocation">'.$location.'<br></div>';
-								echo '<div class="privateEvent">';
->>>>>>> 0edbc3c67b6bd679cb4a0a355a27b32c567a473f
+
 					 			if($privateEvent == 0){
-					 				echo 'Private';
+					 				echo 'Public';
 					 			}
 					 			else
-					 				echo 'Public';
+					 				echo 'Private';
 					 			echo '<br></div>';
 					 			echo '<div class="Fhost">';
 					 			$admin = getEventAdmin($name)['username'];
@@ -296,11 +290,13 @@
 											$lineCom = getLine($tableCom, $j);
 											$comUser = getUsername($lineCom['idUser']);
 											echo '<div class="FcomUser">'.$comUser['username'].'<br></div>';
+											
 											echo '<div class="FcomBody">'.$lineCom['commentary'].'<br></div>';
 										}
 									}
 									else{
 										echo '<div class="FcomUser"></div>';
+										
 										echo '<div class="FcomBody"></div>';
 									}
 								echo '</div>';

@@ -436,6 +436,12 @@ html, body {
 	border: 3px outset grey;
 	background-color: red;
 	color: white;
+	margin-bottom: 10px;
+}
+
+#inviteP input{
+	padding: 5px;
+	border: 3px outset black;
 }
 
 #eventInfo .Ftitle{
@@ -513,9 +519,17 @@ html, body {
 }
 
 .FcomUser{
+	display: inline-block;
 	color: blue;
 	font-style: italic;
 	font-weight: bolder;
+}
+
+.deleteComment{
+	display: inline-block;
+	float: right;
+	color: red;
+	cursor: pointer;
 }
 
 .FcomBody{

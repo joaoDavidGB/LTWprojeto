@@ -80,7 +80,7 @@ function editEvent($idEvent,$name, $dateBegin, $time, $type, $description, $loca
 	if (!$result)
 		return false;
 
-	$stmt = $db->prepare('INSERT INTO EventType(idEvent,type) VALUES (:idEvent,:type)');
+	$stmt = $db->prepare('UPDATE EventType SET type = :type WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':type', $type, PDO::PARAM_STR);
 	$stmt->execute();

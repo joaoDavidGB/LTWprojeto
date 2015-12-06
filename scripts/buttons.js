@@ -4,152 +4,8 @@ $("document").ready(function(){
         //obtem a informação do evento clicado
 		var eventIDA = e.currentTarget.id;
         eventID= eventIDA.substring(1, 4);
-        var antigoTitulo = $( ".Ftitle").text();
-
-        $.post(
-        'events/getSelectedId.php',
-        {
-            'antigoTitulo' : antigoTitulo
-        },
-        function(data){
-            $("#P"+data).css("background-color", "black");
-            $("#I"+data).css("background-color", "black");
-        });
-
-
-
-  		$.post(
-        'events/getEventInfo.php',
-        {
-            'id' : eventID
-        },
-        function(data) {
-            data=JSON.parse(data);
-            var name = data['name'];
-
-            //quando se carrega no mesmo evento ele esconde-se 
-            if ($( ".Ftitle" ).text() == name){
-                if($( "#eventInfo" ).is( ":visible" )){
-                    $("#P"+eventID).css("background-color", "black");
-                    $("#I"+eventID).css("background-color", "black");
-                    $("#eventInfo").hide();
-                }
-                else{
-                    $("#P"+eventID).css("background-color", "green");
-                    $("#I"+eventID).css("background-color", "green");
-                    $("#eventInfo").show("slow");
-                }
-
-                return false;
-            }
-            $("#eventInfo").hide();
-
-            var date = data['dateBegin'];
-            var local = data['location'];
-            var description = data['description'];
-            var image = data['image'];
-            var host = data['host'];
-            var tableCom = data['tableCom'];
-            var maxCom = data['maxCom'];
-            var timeH = data['time'];
-            var type = data['type'];
-            var people = data['people'];
-            var numberPeople = data['Npeople'];
-            var Fprivate = data['privateEvent'];
-            
-            //highlight selected event
-            $("#P"+eventID).css("background-color", "green");
-            $("#I"+eventID).css("background-color", "green");
-
-            var go = data['attend'];
-
-
-            //alteração da informação do host
-            //no caso de ser o proprio user, aparece um botão para dar delete ao evento
-            if (host == "Delete Event"){
-                $( ".editEvent").show();
-                $( ".deleteEvent").text( host);
-                $( ".deleteEvent").show();
-                $( ".hostName").hide();
-                $( "#inviteP").show();
-            }
-            else{
-                $( ".hostName").text(host);
-                $( ".hostName").show();
-                $( ".deleteEvent").hide();
-                $( ".editEvent").hide();
-                $( "#inviteP").hide();
-            }
-
-            //se for mostra o going a preto e o not going aberto, se não for o oposto
-            if(go){
-                $( ".FgoingT").show();
-                $( ".FgoingF").hide();
-                $( ".FstopT").hide();
-                $( ".FstopF").show();
-            }
-            else{
-                $( ".FgoingT").hide();
-                $( ".FgoingF").show();
-                $( ".FstopT").show();
-                $( ".FstopF").hide();
-            }
-
-            //se for host não aparece as opções going/not going
-            if (host == "Delete Event"){
-                $( ".FgoingT").hide();
-                $( ".FgoingF").hide();
-                $( ".FstopT").hide();
-                $( ".FstopF").hide();
-            }
-
-            $("#Fpeople").text(numberPeople + " people going.");
-            $("#FlistPeople").hide();
-	    $("#closeList").hide();
-            $("#FlistPeople").empty();
-            $("#FlistPeople").append('<p id="listTitle">List of people</p>');
-            for(var i = 0; i < numberPeople; i++){
-                var person = people[i]['username'];
-                $("#FlistPeople").append('<p>'+person+'</p>');
-            }
-
-            //alteração de informação genérica
-            $( ".Ftitle" ).text( name);
-            $( ".Fdate" ).text( date);
-            $( ".Ftype").text(type);
-            $( ".Ftime").text( timeH);
-            $( ".Flocation" ).text( local);
-            $( ".Fdescription" ).text( description);
-            $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
-
-            if(Fprivate == 0){
-                $(".FprivateEvent").text("Public");
-            }
-            else
-                $(".FprivateEvent").text("Private");
-            
-            //codigo para alteração de comentarios a apresentar
-            //array com informação relativa aos comentarios
-            var ComentaryArray = data['ArrayCom'];
-            $(".FcomUser").remove();
-            $(".FcomBody").remove();
-            //apenas mostra os comentarios se o utilizador for ao evento
-            if (go){
-                 $("#Fcomments").show();
-                for(var j = 0; j < maxCom; j++){
-                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
-                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
-                }
-            }
-            else{
-                $("#Fcomments").hide();
-            }
-
-            $("#eventInfo").show( "slow");
-
-        }).fail(function(error) {
-                return false;
-        });          
+        changeDisplay(eventID);
+         
     });
 
     $( "#user" ).click(function() {
@@ -260,6 +116,12 @@ $("document").ready(function(){
                 return false;
         }); 
     });
+
+     $( ".deleteComment").click(function(){
+        alert("cenas");
+        var id = ev.currentTarget.id;
+        alert(id);
+    })
 
 
     $( ".editEvent").click(function(){
@@ -383,6 +245,168 @@ $("document").ready(function(){
         $("#invitedTab").css("color", "black");
         $("#invitedTab").css("border", "2px outset red");
     })
+
+    $( "#listEventsAttending p").click(function(ev){
+        var id = ev.currentTarget.id;
+        id = id.substring(6, 9);
+        changeDisplay(id);
+        $("#userEventsAttending").hide();
+    })
+
+    function changeDisplay(id){
+        var eventID = id;
+        var antigoTitulo = $( ".Ftitle").text();
+
+        $.post(
+        'events/getSelectedId.php',
+        {
+            'antigoTitulo' : antigoTitulo
+        },
+        function(data){
+            $("#P"+data).css("background-color", "black");
+            $("#I"+data).css("background-color", "black");
+        });
+
+
+
+        $.post(
+        'events/getEventInfo.php',
+        {
+            'id' : eventID
+        },
+        function(data) {
+            data=JSON.parse(data);
+            var name = data['name'];
+
+            //quando se carrega no mesmo evento ele esconde-se 
+            if ($( ".Ftitle" ).text() == name){
+                if($( "#eventInfo" ).is( ":visible" )){
+                    $("#P"+eventID).css("background-color", "black");
+                    $("#I"+eventID).css("background-color", "black");
+                    $("#eventInfo").hide();
+                }
+                else{
+                    $("#P"+eventID).css("background-color", "green");
+                    $("#I"+eventID).css("background-color", "green");
+                    $("#eventInfo").show("slow");
+                }
+
+                return false;
+            }
+            $("#eventInfo").hide();
+
+            var date = data['dateBegin'];
+            var local = data['location'];
+            var description = data['description'];
+            var image = data['image'];
+            var host = data['host'];
+            var tableCom = data['tableCom'];
+            var maxCom = data['maxCom'];
+            var timeH = data['time'];
+            var type = data['type'];
+            var people = data['people'];
+            var numberPeople = data['Npeople'];
+            var Fprivate = data['privateEvent'];
+            
+            //highlight selected event
+            $("#P"+eventID).css("background-color", "green");
+            $("#I"+eventID).css("background-color", "green");
+
+            var go = data['attend'];
+
+
+            //alteração da informação do host
+            //no caso de ser o proprio user, aparece um botão para dar delete ao evento
+            if (host == "Delete Event"){
+                $( ".editEvent").show();
+                $( ".deleteEvent").text( host);
+                $( ".deleteEvent").show();
+                $( ".hostName").hide();
+                $( "#inviteP").show();
+            }
+            else{
+                $( ".hostName").text(host);
+                $( ".hostName").show();
+                $( ".deleteEvent").hide();
+                $( ".editEvent").hide();
+                $( "#inviteP").hide();
+            }
+
+            //se for mostra o going a preto e o not going aberto, se não for o oposto
+            if(go){
+                $( ".FgoingT").show();
+                $( ".FgoingF").hide();
+                $( ".FstopT").hide();
+                $( ".FstopF").show();
+            }
+            else{
+                $( ".FgoingT").hide();
+                $( ".FgoingF").show();
+                $( ".FstopT").show();
+                $( ".FstopF").hide();
+            }
+
+            //se for host não aparece as opções going/not going
+            if (host == "Delete Event"){
+                $( ".FgoingT").hide();
+                $( ".FgoingF").hide();
+                $( ".FstopT").hide();
+                $( ".FstopF").hide();
+            }
+
+
+
+            $("#Fpeople").text(numberPeople + " people going.");
+            $("#FlistPeople").hide();
+        $("#closeList").hide();
+            $("#FlistPeople").empty();
+            $("#FlistPeople").append('<p id="listTitle">List of people</p>');
+            for(var i = 0; i < numberPeople; i++){
+                var person = people[i]['username'];
+                $("#FlistPeople").append('<p>'+person+'</p>');
+            }
+
+            //alteração de informação genérica
+            $( ".Ftitle" ).text( name);
+            $( ".FdateTime" ).html( date+"<br>"+timeH);
+            $( ".FTypeLocation").text("Location:"+local+ "  || Event Type:"+type);
+            $( ".Fdescription" ).text( description);
+            $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
+
+            if(Fprivate == 0){
+                $(".FprivateEvent").text("Public");
+            }
+            else
+                $(".FprivateEvent").text("Private");
+            
+            //codigo para alteração de comentarios a apresentar
+            //array com informação relativa aos comentarios
+            var ComentaryArray = data['ArrayCom'];
+            $(".FcomUser").remove();
+            $(".FcomBody").remove();
+            $(".deleteComment").remove();
+            //apenas mostra os comentarios se o utilizador for ao evento
+            if (go){
+                 $("#Fcomments").show();
+                for(var j = 0; j < maxCom; j++){
+                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
+                    if(host == "Delete Event" || data['session'] == ComentaryArray[2*j]){
+                         $("#Fcomments").append('<div class="deleteComment" id="deleteComment'+j+'"  >delete</div>');
+                    }
+                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
+                }
+            }
+            else{
+                $("#Fcomments").hide();
+            }
+
+            $("#eventInfo").show( "slow");
+
+        }).fail(function(error) {
+                return false;
+        });          
+    }
+
 })
 
     
