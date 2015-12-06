@@ -143,11 +143,11 @@
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
-					 			if($privateEvent === 0){
-					 				echo 'Private';
+					 			if($privateEvent == 0){
+					 				echo 'Public';
 					 			}
 					 			else
-					 				echo 'Public';
+					 				echo 'Private';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -181,11 +181,11 @@
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
-					 			if($privateEvent === 0){
-					 				echo 'Private';
+					 			if($privateEvent == 0){
+					 				echo 'Public';
 					 			}
 					 			else
-					 				echo 'Public';
+					 				echo 'Private';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -217,7 +217,7 @@
 					 			echo '<div class="Ftime">'.$time.'<br></div>';
 					 			echo '<div class="Ftype">'.$type.'<br></div>';
 					 			echo '<div class="Flocation">'.$location.'<br></div>';
-								echo '<div class="privateEvent">';
+								echo '<div class="FprivateEvent">';
 					 			if($privateEvent === 0){
 					 				echo 'Private';
 					 			}

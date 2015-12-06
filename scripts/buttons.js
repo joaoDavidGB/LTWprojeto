@@ -122,10 +122,10 @@ $("document").ready(function(){
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
 
             if(Fprivate == 0){
-                $(".privateEvent").text("Private");
+                $(".FprivateEvent").text("Public");
             }
             else
-                $(".privateEvent").text("Public");
+                $(".FprivateEvent").text("Private");
             
             //codigo para alteração de comentarios a apresentar
             //array com informação relativa aos comentarios
