@@ -214,6 +214,8 @@ $("document").ready(function(){
 
 		var eventID;
 
+		
+
 		$.post(
         'events/search.php',
         {
@@ -226,6 +228,20 @@ $("document").ready(function(){
         	else{
         		eventID = data;
 
+        		var antigoTitulo = $( ".Ftitle").text();
+
+		        $.post(
+		        'events/getSelectedId.php',
+		        {
+		            'antigoTitulo' : antigoTitulo
+		        },
+		        function(data){
+		            $("#P"+data).css("background-color", "black");
+		            $("#I"+data).css("background-color", "black");
+		        });
+
+		        
+
         		$.post(
 		        'events/getEventInfo.php',
 		        {
@@ -237,6 +253,16 @@ $("document").ready(function(){
 
 		            //quando se carrega no mesmo evento ele esconde-se 
 		            if ($( ".Ftitle" ).text() == name){
+		                if($( "#eventInfo" ).is( ":visible" )){
+		                    $("#P"+eventID).css("background-color", "black");
+		                    $("#I"+eventID).css("background-color", "black");
+		                }
+		                else{
+		                    $("#P"+eventID).css("background-color", "green");
+		                    $("#I"+eventID).css("background-color", "green");
+		                }
+
+
 		                $("#eventInfo").toggle();
 		                return false;
 		            }
@@ -254,6 +280,10 @@ $("document").ready(function(){
 		            var people = data['people'];
             		var numberPeople = data['Npeople'];
 		            var Fprivate = data['privateEvent'];
+
+		            //highlight selected event
+			        $("#P"+eventID).css("background-color", "green");
+			        $("#I"+eventID).css("background-color", "green");
 
 		            var go = data['attend'];
 

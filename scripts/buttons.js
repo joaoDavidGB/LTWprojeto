@@ -4,6 +4,20 @@ $("document").ready(function(){
         //obtem a informação do evento clicado
 		var eventIDA = e.currentTarget.id;
         eventID= eventIDA.substring(1, 4);
+        var antigoTitulo = $( ".Ftitle").text();
+
+        $.post(
+        'events/getSelectedId.php',
+        {
+            'antigoTitulo' : antigoTitulo
+        },
+        function(data){
+            $("#P"+data).css("background-color", "black");
+            $("#I"+data).css("background-color", "black");
+        });
+
+
+
   		$.post(
         'events/getEventInfo.php',
         {
@@ -15,7 +29,17 @@ $("document").ready(function(){
 
             //quando se carrega no mesmo evento ele esconde-se 
             if ($( ".Ftitle" ).text() == name){
-                $("#eventInfo").toggle();
+                if($( "#eventInfo" ).is( ":visible" )){
+                    $("#P"+eventID).css("background-color", "black");
+                    $("#I"+eventID).css("background-color", "black");
+                    $("#eventInfo").hide();
+                }
+                else{
+                    $("#P"+eventID).css("background-color", "green");
+                    $("#I"+eventID).css("background-color", "green");
+                    $("#eventInfo").show("slow");
+                }
+
                 return false;
             }
             $("#eventInfo").hide();
@@ -33,8 +57,12 @@ $("document").ready(function(){
             var numberPeople = data['Npeople'];
             var Fprivate = data['privateEvent'];
             
+            //highlight selected event
+            $("#P"+eventID).css("background-color", "green");
+            $("#I"+eventID).css("background-color", "green");
 
             var go = data['attend'];
+
 
             //alteração da informação do host
             //no caso de ser o proprio user, aparece um botão para dar delete ao evento
@@ -336,11 +364,23 @@ $("document").ready(function(){
     $("#publicTab").click(function(){
         $("#invitedEvents").hide();
         $("#publicEvents").show();
+        $("#publicTab").css("background-color", "orange");
+        $("#publicTab").css("border", "2px outset red");
+        $("#publicTab").css("color", "black");
+        $("#invitedTab").css("background-color", "black");
+        $("#invitedTab").css("color", "grey");
+        $("#invitedTab").css("border", "2px inset grey");
     })
 
     $("#invitedTab").click(function(){
         $("#publicEvents").hide();
         $("#invitedEvents").show();
+        $("#publicTab").css("background-color", "black");
+        $("#publicTab").css("color", "grey");
+        $("#publicTab").css("border", "2px inset grey");
+        $("#invitedTab").css("background-color", "orange");
+        $("#invitedTab").css("color", "black");
+        $("#invitedTab").css("border", "2px outset red");
     })
 })
 

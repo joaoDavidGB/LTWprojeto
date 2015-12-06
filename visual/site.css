@@ -177,12 +177,16 @@ html, body {
 	border: 2px outset red;
 	text-align: center;
 	width: 49%;
+	background-color: orange;
+	color: black;
 }
 #publicTab{
 	float: right;
-	border: 2px outset red;
+	border: 2px inset grey;
 	text-align: center;
 	width: 49%;
+	background-color: black;
+	color: grey;
 }
 
 
