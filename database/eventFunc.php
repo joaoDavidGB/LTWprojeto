@@ -462,8 +462,8 @@ function getEventSortedbyDate(){
 	$stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	if(count($result)==null)
-		return -1;
+	if(count($result)==0)
+		return false;
 
 	return $result;
 }

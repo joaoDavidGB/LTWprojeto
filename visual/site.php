@@ -79,7 +79,10 @@
 				<input type="text" placeholder="type" name="type"><br>
 				<input type="text" placeholder="location" name="location"><br>
 				<input type="text" placeholder="description" name="description"><br>
-				<input type="integer" placeholder="privateEvent" name="privateEvent"><br>
+				<select name="type" form="createEvent">
+  					<option value="0">Public</option>
+  					<option value="1">Private</option>
+				</select><br>
 				<input type="text" placeholder="image URL" name="image"><br>
 				<input id="submitEvent" type="submit" value="Submit Event">
 			</form>
@@ -90,7 +93,8 @@
 			 	<?
 			 		include('database/eventFunc.php');
 			 		$table = getEventSortedbyDate();
-			 		$max = sizeof($table);
+			 		$max = count($table);
+			 		if($table!=false){
 			 		for($i = 0; $i < $max; $i++){
 			 			$line = getLine($table, $i);
 			 			$idEvent = $line['idEvent'];
@@ -112,6 +116,7 @@
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 						echo '</div>';
+			 		}
 			 		}
 			 	?>
 			</div>
