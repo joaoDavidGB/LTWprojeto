@@ -112,7 +112,9 @@
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
-					 			echo '<div class="privateEvent">'.$privateEvent.'<br></div>';	
+					 			if($privateEvent === 0)
+					 			echo '<div class="privateEvent">Private<br></div>';
+								else echo '<div class="privateEvent">Public<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 						echo '</div>';
@@ -142,11 +144,11 @@
 					 			echo '<div class="Ftime">'.$time.'<br></div>';
 					 			echo '<div class="Ftype">'.$type.'<br></div>';
 					 			echo '<div class="Flocation">'.$location.'<br></div>';
-					 			echo '<div class="FprivateEvent">'.$privateEvent.'<br></div>';
-
-
+								if($privateEvent === 0)
+					 			echo '<div class="FprivateEvent">Private<br></div>';
+								else echo '<div class="FprivateEvent">Public<br></div>';
 					 			echo '<div class="Fhost">';
-					 				$admin = getEventAdmin($name)['username'];
+					 			$admin = getEventAdmin($name)['username'];
 					 				if ($admin != $_SESSION['username']){
 					 					echo '<div class="hostName">host: '.$admin.'</div>';
 					 					echo '<div class="editEvent" style="display: none;">Edit Event</div>';
@@ -185,7 +187,7 @@
 					 			echo '</div>';
 
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
-					 			echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
+					 			//echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
 
 
 								echo '<div id="Fcomments">';
@@ -224,14 +226,17 @@
 				<h1>Edit Event</h1>
 				<form action="/" name="editEventForm" id="editEventForm" method="post">
 					<input type="text" value="" name="tituloAntigo" style="display:none;">
-					<input type="text" value="" name="titulo"><br>
+					<input type="text" placeholder="name" value="" name="titulo"><br>
 					<input type="date" value="" name="dateBegin"><br>
 					<input type="time" value="" name="time"><br>
-					<input type="text" value="" name="type"><br>
-					<input type="text" value="" name="location"><br>
-					<input type="text" value="" name="description"><br>
-					<input type="integer" value="" name="privateEvent"><br>
-					<input type="text" value="" name="image"><br>
+					<input type="text" placeholder="type" value="" name="type"><br>
+					<input type="text" placeholder="location" value="" name="location"><br>
+					<input type="text" placeholder="description" value="" name="description"><br>
+					<select name="privateEvent" form="createEvent">
+  						<option value="0" selected="selected">Public</option>
+  						<option value="1">Private</option>
+					</select><br>
+					<input type="text" placeholder="image URL" value="" name="image"><br>
 					<input id="subEditEvent" type="submit" value="Submit Event">
 				</form>
 				<button id="closeEdit">Cancel</button>
