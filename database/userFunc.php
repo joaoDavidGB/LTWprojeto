@@ -29,6 +29,19 @@ function createUser($username, $password){
 	return true;
 }
 
+function editUser($oldname, $username, $password){
+	global $db;
+	$password = generateHash($password);
+	$stmt = $db->prepare('UPDATE User SET username = :username, password = :password WHERE username = :name');
+	$stmt->bindParam(':name', $oldname, PDO::PARAM_STR);
+	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+	$stmt->bindParam(':password', $password, PDO::PARAM_STR);
+	$stmt->execute();
+
+	return $stmt;
+
+}
+
 function deleteUser($username){
 	global $db;
 
@@ -115,8 +128,8 @@ function existUser($username) {
     $stmt = $db->prepare('SELECT * FROM User WHERE username = :user');
     $stmt->bindParam(':user', $username, PDO::PARAM_STR);
 	$stmt->execute();
-    $result = $stmt->fetch();
-	if (!(count($result) === 0)) {
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if ((count($result) === 0)) {
 		return false;
 	}
 	return true;

@@ -366,4 +366,124 @@ $("document").ready(function(){
         });  
 
 	});
+
+	$("#UserSettingsForm").submit(function(ev){
+		ev.preventDefault();
+
+		var name = document.forms["UserSettingsForm"]["oldname"].value;
+		var username = document.forms["UserSettingsForm"]["username"].value;
+		var pw = document.forms["UserSettingsForm"]["oldpw"].value;
+		var newpw = document.forms["UserSettingsForm"]["newpw"].value;
+		var newpw2 = document.forms["UserSettingsForm"]["newpw2"].value;
+
+		//verifica se o texto foi preenchido
+		if (name == ""){
+			alert("the name can't be empty");
+			return false;
+		}
+		else if (pw == ""){
+			alert("insert password pls");
+			return false;
+		}
+		$.post(
+        'accounts/searchUser.php',
+        {
+        	'antigoNome' : name,
+            'username' : username,
+            'pw' : pw,
+            'npw' : newpw,
+            'npw2' : newpw2
+        },
+        function(data) {
+        	switch(data){
+        		case 'username_in_use':
+        		alert("username already in use.");
+        		break;
+        		case 'name_changed':
+        		alert("username changed successfully!");
+        		location.reload();
+        		break;
+        		case 'fill_all_pw':
+        		alert("you did not fill every necessary fields to change the password.");
+        		break;
+        		case 'passwords_not_match':
+        		alert("passwords do not match.");
+        		break;
+        		case 'wrong_password':
+        		alert("Wrong password.");
+        		break;
+        		case 'password_changed':
+        		alert("password changed successfully!");
+        		location.reload();
+        		break;
+        		default:
+        		alert(data);
+        		break;
+        	}
+
+        }).fail(function(error) {
+                return false;
+        });  
+
+	});
+
+
+	$("#DeleteAccForm").submit(function(ev){
+		ev.preventDefault();
+
+		var name = document.forms["DeleteAccForm"]["username"].value;
+		var pw = document.forms["DeleteAccForm"]["pw"].value;
+		var pw2 = document.forms["DeleteAccForm"]["pw2"].value;
+
+		//verifica se o texto foi preenchido
+		if (name == ""){
+			alert("the name can't be empty");
+			return false;
+		}
+		else if (pw == "" || pw2 == ""){
+			alert("insert password twice pls");
+			return false;
+		}
+		else if (pw != pw2){
+			alert("passwords do not match");
+			return false;
+		}
+
+		$.post(
+        'accounts/delete.php',
+        {
+            'username' : name,
+            'pw' : pw,
+            'pw2' : pw2,
+        },
+        function(data) {
+        	switch(data){
+        		case 'wrong_password':
+        		alert("wrong password");
+        		break;
+        		case 'RIP':
+        		alert("Rest in Piece " + name);
+        		$.post(
+		        'accounts/logout.php',
+		        {
+		            
+		        },
+		        function(data) {
+		            location.href='index.php?redirect=home';
+		        }).fail(function(error) {
+		                return false;
+		        }); 
+        		break;
+        		default:
+        		alert(data);
+        		break;
+        	}
+
+        }).fail(function(error) {
+                return false;
+        });  
+
+	});
+
+
 })

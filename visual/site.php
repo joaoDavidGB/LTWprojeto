@@ -35,10 +35,38 @@
 			?>
 			</div>
 			<div id="userOptions" style="display: none">
-				<p id="showProfile">Profile</p>
 				<p id="Settings">Setting</p>
 				<p id="logout">Logout</p>
+				<p id="Delete">Delete Account</p>
 			</div>
+		</div>
+
+		<div id="UserSettings" style="display:none;">
+			<?
+			echo '
+			<form action="/" name="UserSettingsForm" id="UserSettingsForm" method="post">
+				<input type="text" value="'.$_SESSION['username'].'" name="oldname" style="display:none;"><br>
+				<input type="text" value="'.$_SESSION['username'].'" name="username"><br>
+				<input type="password" placeholder="password" name="oldpw"><br>
+				<input type="password" placeholder="new-password" name="newpw"><br>
+				<input type="password" placeholder="new-password" name="newpw2"><br>
+				<input id="submitSettings" type="submit" value="Apply">
+			</form> ';
+			echo '<button id="closeUserSetting">X</button>';
+			?>
+		</div>
+
+		<div id="DeleteAcc" style="display:none;">
+			<?
+			echo '
+			<form action="/" name="DeleteAccForm" id="DeleteAccForm" method="post">
+				<input type="text" value="'.$_SESSION['username'].'" name="username" style="display:none;"><br>
+				<input type="password" placeholder="password" name="pw"><br>
+				<input type="password" placeholder="reenter password" name="pw2"><br>
+				<input id="delete" type="submit" value="Delete">
+			</form> ';
+			echo '<button id="closeUserDelete">X</button>';
+			?>
 		</div>
 
 		<!-- div com o menu de criação de eventos -->

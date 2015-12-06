@@ -298,6 +298,25 @@ $("document").ready(function(){
         $("#closeList").toggle();
 
     })
+
+    $("#Settings").click(function(){
+        $("#UserSettings").toggle();
+    })
+
+    $("#closeUserSetting").click(function(){
+        $("#UserSettings").toggle();
+    })
+
+    $("#Delete").click(function(){
+        var x = confirm("Do you really want to permanently delete this account?");
+        if(x){
+            $("#DeleteAcc").toggle();
+        }
+    })
+
+    $("#closeUserDelete").click(function(){
+        $("#DeleteAcc").toggle();
+    })
 })
 
     
