@@ -458,7 +458,14 @@ function getEventfromID($idEvent){
 function getEventSortedbyDate(){
 	global $db;
 
-	$stmt = $db->prepare('SELECT * FROM Event ORDER BY DATE(dateBegin), TIME(time)');
+	
+	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
+	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
+	$stmt->execute();
+	$idUser = $stmt->fetch();
+	$idUser = $idUser['idUser'];
+
+	$stmt = $db->prepare('SELECT * FROM Event WHERE privateEvent = 0 ORDER BY DATE(dateBegin), TIME(time)');
 	$stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -120,7 +120,8 @@ $("document").ready(function(){
 		var type = document.forms["createEventForm"]["type"].value;
 		var location2 = document.forms["createEventForm"]["location"].value;
 		var description = document.forms["createEventForm"]["description"].value;
-		var privateEvent = document.forms["createEventForm"]["privateEvent"].value;
+		var privateEvent = $('select[name="privateEvent"]').val()
+		//var privateEvent = document.forms["createEventForm"]["privateEvent"].value;
 		var image = document.forms["createEventForm"]["image"].value;
 
 		//verifica se os campos foram preenchidos

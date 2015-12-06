@@ -79,8 +79,8 @@
 				<input type="text" placeholder="type" name="type"><br>
 				<input type="text" placeholder="location" name="location"><br>
 				<input type="text" placeholder="description" name="description"><br>
-				<select name="type" form="createEvent">
-  					<option value="0">Public</option>
+				<select name="privateEvent" form="createEvent">
+  					<option value="0" selected="selected">Public</option>
   					<option value="1">Private</option>
 				</select><br>
 				<input type="text" placeholder="image URL" name="image"><br>
