@@ -120,6 +120,7 @@ $("document").ready(function(){
 		var type = document.forms["createEventForm"]["type"].value;
 		var location2 = document.forms["createEventForm"]["location"].value;
 		var description = document.forms["createEventForm"]["description"].value;
+		var privateEvent = document.forms["createEventForm"]["privateEvent"].value;
 		var image = document.forms["createEventForm"]["image"].value;
 
 		//verifica se os campos foram preenchidos
@@ -138,6 +139,7 @@ $("document").ready(function(){
 				'type' : type,
 				'location' : location2,
 				'description' : description,
+				'privateEvent' :privateEvent,
 				'image' : image
 			},
 			function(data) {
@@ -284,6 +286,7 @@ $("document").ready(function(){
 		            $( ".Ftype").text(type);
 		            $( ".Flocation" ).text( local);
 		            $( ".Fdescription" ).text( description);
+   		            $( ".FprivateEvent" ).text( local);
 		            $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
 		            
 		            //codigo para alteração de comentarios a apresentar
@@ -325,6 +328,7 @@ $("document").ready(function(){
 		var type = document.forms["editEventForm"]["type"].value;
 		var local = document.forms["editEventForm"]["location"].value;
 		var description = document.forms["editEventForm"]["description"].value;
+		var privateEvent = document.forms["editEventForm"]["privateEvent"].value;		
 		var image = document.forms["editEventForm"]["image"].value;
 
 		//verifica se o texto foi preenchido
@@ -346,6 +350,7 @@ $("document").ready(function(){
             'type' : type,
             'local' : local,
             'description' : description,
+            'privateEvent' :privateEvent,
             'image' : image
         },
         function(data) {

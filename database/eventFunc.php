@@ -1,7 +1,7 @@
 <?php
 include_once('connection.php');
 
-function createEvent($name, $dateBegin, $time, $type, $description, $location, $image){
+function createEvent($name, $dateBegin, $time, $type, $description, $location, $privateEvent, $image){
 	global $db;
 	session_start();
 
@@ -14,13 +14,14 @@ function createEvent($name, $dateBegin, $time, $type, $description, $location, $
 		return false;
 	}
 
-	$stmt = $db->prepare('INSERT INTO Event(name,dateBegin,time,description, location, image)
-						values(:name, :dateBegin, :time, :description, :location, :image)');
+	$stmt = $db->prepare('INSERT INTO Event(name,dateBegin,time,description, location, privateEvent, image)
+						values(:name, :dateBegin, :time, :description, :location,:privateEvent, :image)');
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':dateBegin', $dateBegin, PDO::PARAM_STR);
 	$stmt->bindParam(':time', $time, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
 	$stmt->bindParam(':location', $location, PDO::PARAM_STR);
+	$stmt->bindParam(':privateEvent', $privateEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':image', $image, PDO::PARAM_STR);
 
 	$stmt->execute();
@@ -55,16 +56,18 @@ function createEvent($name, $dateBegin, $time, $type, $description, $location, $
 	return true;
 }
 
-function editEvent($idEvent,$name, $dateBegin, $time, $type, $description, $location, $image){
+function editEvent($idEvent,$name, $dateBegin, $time, $type, $description, $location, $privateEvent, $image){
 	global $db;
 
-	$stmt = $db->prepare('UPDATE Event SET name=:name, dateBegin=:dateBegin, time=:time, description=:description, location=:location,image=:image WHERE idEvent=:idEvent');
+	$stmt = $db->prepare('UPDATE Event SET name=:name, dateBegin=:dateBegin, time=:time, description=:description, 
+		location=:location,privateEvent=:privateEvent,image=:image WHERE idEvent=:idEvent');
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 	$stmt->bindParam(':dateBegin', $dateBegin, PDO::PARAM_STR);
 	$stmt->bindParam(':time', $time, PDO::PARAM_STR);
 	$stmt->bindParam(':description', $description, PDO::PARAM_STR);
 	$stmt->bindParam(':location', $location, PDO::PARAM_STR);
+	$stmt->bindParam(':privateEvent', $privateEvent, PDO::PARAM_INT);	
 	$stmt->bindParam(':image', $image, PDO::PARAM_STR);
 
 	$result = $stmt->execute();
@@ -457,7 +460,12 @@ function getEventSortedbyDate(){
 
 	$stmt = $db->prepare('SELECT * FROM Event ORDER BY DATE(dateBegin), TIME(time)');
 	$stmt->execute();
-	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	if(count($result)==null)
+		return -1;
+
+	return $result;
 }
 
 function getUserAdminEvents($username){

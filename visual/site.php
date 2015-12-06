@@ -79,6 +79,7 @@
 				<input type="text" placeholder="type" name="type"><br>
 				<input type="text" placeholder="location" name="location"><br>
 				<input type="text" placeholder="description" name="description"><br>
+				<input type="integer" placeholder="privateEvent" name="privateEvent"><br>
 				<input type="text" placeholder="image URL" name="image"><br>
 				<input id="submitEvent" type="submit" value="Submit Event">
 			</form>
@@ -98,6 +99,7 @@
 			 			$time = $line['time'];
 			 			$type = getEventType($name);
 			 			$location = $line['location'];
+			 			$privateEvent = $line["privateEvent"];
 			 			$image = $line["image"];
 						echo '<div id='.$idEvent.' class="listEvents"> ';
 							echo '<div class="eventResume">';
@@ -106,6 +108,7 @@
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
 					 			echo '<div class="location">'.$location.'<br></div>';
+					 			echo '<div class="privateEvent">'.$privateEvent.'<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
 						echo '</div>';
@@ -124,6 +127,7 @@
 			 			$time = $line['time'];
 			 			$type = getEventType($name);
 			 			$location = $line['location'];
+			 			$privateEvent = $line['privateEvent'];
 			 			$image = $line["image"];
 			 			$description = $line['description'];
 
@@ -133,7 +137,7 @@
 					 			echo '<div class="Ftime">'.$time.'<br></div>';
 					 			echo '<div class="Ftype">'.$type.'<br></div>';
 					 			echo '<div class="Flocation">'.$location.'<br></div>';
-
+					 			echo '<div class="FprivateEvent">'.$privateEvent.'<br></div>';
 
 
 					 			echo '<div class="Fhost">';
@@ -221,6 +225,7 @@
 					<input type="text" value="" name="type"><br>
 					<input type="text" value="" name="location"><br>
 					<input type="text" value="" name="description"><br>
+					<input type="integer" value="" name="privateEvent"><br>
 					<input type="text" value="" name="image"><br>
 					<input id="subEditEvent" type="submit" value="Submit Event">
 				</form>

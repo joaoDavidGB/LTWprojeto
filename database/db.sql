@@ -19,6 +19,7 @@ dateBegin DATE,
 time TIME,
 description VARCHAR NOT NULL,
 location VARCHAR NOT NULL,
+privateEvent INTEGER NOT NULL,
 image VARCHAR NOT NULL
 );
  

@@ -8,12 +8,13 @@
   $type = $_POST['type'];
   $local = $_POST['local'];
   $description = $_POST['description'];
+  $privateEvent = $_POST['privateEvent'];
   $image = $_POST['image'];
 
   $idEvent = getEventId($antigoNome);
 
   try {
-    $event = editEvent($idEvent,$name, $date, $timeH, $type, $description, $local, $image);
+    $event = editEvent($idEvent,$name, $date, $timeH, $type, $description, $local, $privateEvent, $image);
     if ($event === false){
       echo "fail";
     }

@@ -401,6 +401,11 @@ html, body {
 	text-align: center;
 }
 
+#eventInfo .FprivateEvent{
+	text-align: center;
+}
+
+
 #eventInfo .Fdescription{
 	margin: 5%;
 }
