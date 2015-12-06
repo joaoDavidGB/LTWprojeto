@@ -125,6 +125,8 @@ function deleteEvent($name){
 	return true;
 }
 
+
+
 function getAllEvents(){
 	global $db;
 

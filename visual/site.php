@@ -35,11 +35,32 @@
 			?>
 			</div>
 			<div id="userOptions" style="display: none">
+				<p id="eventsAttending">Events Attending</p>
 				<p id="Settings">Setting</p>
 				<p id="logout">Logout</p>
 				<p id="Delete">Delete Account</p>
 			</div>
 		</div>
+
+		<div id="userEventsAttending" style="display:none;">
+		<? 
+			include_once('database/userFunc.php');
+			$events = getEventsFromUser($_SESSION['username']);
+			$Nevents = count($events);
+			echo '<div id="listEventsAttending">';
+			echo '<p id="listTitle">List of Events Attending</p>';
+			include_once('database/eventFunc.php');
+			for($i = 0; $i < $Nevents ; $i++){
+				$event = $events[$i]['idEvent'];
+				$nameEvent = getEventfromID($event)['name'];
+				echo '<p>'.$nameEvent.'</p>';
+			}
+			echo '</div>';
+			echo '<button id="closeEventsAttending">X</button>';
+
+			?>
+			
+		</div> 
 
 		<div id="UserSettings" style="display:none;">
 			<?
@@ -91,7 +112,7 @@
 			<!-- div com a lista de eventos no lado esquerdo da pagina -->
 			<div id="eventList">
 			 	<?
-			 		include('database/eventFunc.php');
+			 		include_once('database/eventFunc.php');
 			 		$table = getEventSortedbyDate();
 			 		$max = count($table);
 			 		if($table!=false){

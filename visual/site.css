@@ -320,6 +320,20 @@ html, body {
 	cursor: pointer;
 }
 
+#listEventsAttending{
+	position: absolute;
+	width: 20%;
+	height: 70%;
+	top: 25%;
+	left: 60%;
+	background-color: grey;
+	color: black;
+	font-weight: bold;
+	border: 3px outset orange;
+	z-index: 1;
+	overflow-y: auto;
+}
+
 #FlistPeople{
 	position: absolute;
 	width: 20%;
@@ -334,8 +348,19 @@ html, body {
 	overflow-y: auto;
 }
 
+#listEventsAttending p{
+	margin-left: 10%;
+}
+
 #FlistPeople p{
 	margin-left: 10%;
+}
+
+.userEventsAttending #listTitleEvents{
+	color: orange;
+	text-decoration: underline;
+	text-align: center;
+	margin-left: 0%;
 }
 
 #FlistPeople #listTitle{
@@ -343,6 +368,14 @@ html, body {
 	text-decoration: underline;
 	text-align: center;
 	margin-left: 0%;
+}
+
+#closeEventsAttending{
+	position: absolute;
+	top:24%;
+	left:79%;
+	display: none;
+	z-index: 2;
 }
 
 #closeList{

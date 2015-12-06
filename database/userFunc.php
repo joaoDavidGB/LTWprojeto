@@ -29,6 +29,28 @@ function createUser($username, $password){
 	return true;
 }
 
+function getEventsFromUser($username){
+	global $db;
+	
+	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
+	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+	$stmt->execute();
+
+	$result = $stmt->fetchAll();
+
+	if (!(count($result) === 1)) {
+		return false;
+	}
+
+	$idUser = $result[0]['idUser'];
+
+	$stmt = $db->prepare('SELECT idEvent FROM AttendEvent WHERE idUser = :idUser');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+
+	return $stmt->fetchAll();
+}
+
 function deleteUser($username){
 	global $db;
 

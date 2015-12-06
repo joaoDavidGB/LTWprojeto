@@ -299,6 +299,14 @@ $("document").ready(function(){
 
     })
 
+    $("#eventsAttending").click(function(){
+        $("#userEventsAttending").toggle();
+    })
+
+    $("#closeEventsAttending").click(function(){
+        $("#userEventsAttending").toggle();
+    })
+
     $("#Settings").click(function(){
         $("#UserSettings").toggle();
     })
