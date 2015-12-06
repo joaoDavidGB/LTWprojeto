@@ -53,6 +53,11 @@ function createEvent($name, $dateBegin, $time, $type, $description, $location, $
 	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 
+	$stmt = $db->prepare('INSERT INTO Invite(idUser,idEvent) VALUES (:idUser,:idEvent)');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+
 	return true;
 }
 
@@ -118,6 +123,14 @@ function deleteEvent($name){
 	$stmt->execute();
 
 	$stmt = $db->prepare('DELETE FROM Event WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent',$idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$stmt = $db->prepare('DELETE FROM Event WHERE idEvent = :idEvent');
+	$stmt->bindParam(':idEvent',$idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$stmt = $db->prepare('DELETE FROM Invite WHERE idEvent = :idEvent');
 	$stmt->bindParam(':idEvent',$idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 	
@@ -447,7 +460,7 @@ function getEventfromID($idEvent){
 	global $db;
 
 	$stmt = $db->prepare('SELECT * FROM Event WHERE idEvent = :idEvent');
-	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_STR);
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 	$stmt->execute();
 	$Event = $stmt->fetch();
 	if ($Event == null)
@@ -495,6 +508,42 @@ function getUserAdminEvents($username){
 	$stmt->execute();
 	return  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+}
+
+function invite($idUser, $idEvent){
+	global $db;
+
+	$stmt = $db->prepare('INSERT INTO Invite(idUser, idEvent) values(:idUser, :idEvent)');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt->execute();
+
+	return $stmt;
+}
+
+function getInvitedEvents($idUser){
+	global $db;
+
+	$stmt = $db->prepare('SELECT idEvent FROM Invite WHERE idUser = :idUser');
+	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+	$stmt->execute();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	if(count($result)==0)
+		return false;
+
+	return $result;
+
+	
+}
+
+function getUserID($username){
+	global $db;
+
+	$stmt = $db->prepare('SELECT idUser FROM User WHERE username = :name');
+	$stmt->bindParam(':name', $username, PDO::PARAM_STR);
+	$stmt->execute();
+	return $stmt->fetch()['idUser'];
 }
 
 ?>

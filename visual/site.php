@@ -111,6 +111,15 @@
 
 			<!-- div com a lista de eventos no lado esquerdo da pagina -->
 			<div id="eventList">
+				<div id="EventTab">
+					<div id="invitedTab">
+						INVITED EVENTS
+					</div>
+					<div id="publicTab">
+						PUBLIC EVENTS
+					</div>
+				</div>
+				<div id="publicEvents" style="display:none;">
 			 	<?
 			 		include_once('database/eventFunc.php');
 			 		$table = getEventSortedbyDate();
@@ -126,7 +135,7 @@
 			 			$location = $line['location'];
 			 			$privateEvent = $line["privateEvent"];
 			 			$image = $line["image"];
-						echo '<div id='.$idEvent.' class="listEvents"> ';
+						echo '<div id=P'.$idEvent.' class="listEvents"> ';
 							echo '<div class="eventResume">';
 								echo '<div class="title">'.$name.'<br></div>';
 					 			echo '<div class="date">'.$date.'<br></div>';
@@ -142,6 +151,41 @@
 			 		}
 			 		}
 			 	?>
+			 	</div>
+			 	<div id="invitedEvents">
+			 	<?
+			 		include_once('database/eventFunc.php');
+			 		$idUser = getUserID($_SESSION['username']);
+			 		$table = getInvitedEvents($idUser);
+			 		$max = count($table);
+			 		if($table!=false){
+			 		for($i = 0; $i < $max; $i++){
+			 			$line = getEventfromID($table[$i]['idEvent']);
+			 			$idEvent = $line['idEvent'];
+			 			$name = $line['name'];
+			 			$date = $line['dateBegin'];
+			 			$time = $line['time'];
+			 			$type = getEventType($name);
+			 			$location = $line['location'];
+			 			$privateEvent = $line["privateEvent"];
+			 			$image = $line["image"];
+						echo '<div id=I'.$idEvent.' class="listEvents"> ';
+							echo '<div class="eventResume">';
+								echo '<div class="title">'.$name.'<br></div>';
+					 			echo '<div class="date">'.$date.'<br></div>';
+					 			echo '<div class="time">'.$time.'<br></div>';
+					 			echo '<div class="type">'.$type.'<br></div>';
+					 			echo '<div class="location">'.$location.'<br></div>';
+					 			if($privateEvent === 0)
+					 			echo '<div class="privateEvent">Private<br></div>';
+								else echo '<div class="privateEvent">Public<br></div>';	
+				 			echo '</div>';
+				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
+						echo '</div>';
+			 		}
+			 		}
+			 	?>
+			 	</div>
 			</div>
 			<!-- div com a informação do evento selecionado. Lado direito da pagina -->
 			<div id="eventInfo"  style="display:none";>
@@ -208,7 +252,7 @@
 					 			echo '</div>';
 
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
-					 			//echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
+					 			echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
 
 
 								echo '<div id="Fcomments">';
@@ -253,7 +297,7 @@
 					<input type="text" placeholder="type" value="" name="type"><br>
 					<input type="text" placeholder="location" value="" name="location"><br>
 					<input type="text" placeholder="description" value="" name="description"><br>
-					<select name="privateEvent" form="createEvent">
+					<select name="privateEvent" form="editEventForm">
   						<option value="0" selected="selected">Public</option>
   						<option value="1">Private</option>
 					</select><br>

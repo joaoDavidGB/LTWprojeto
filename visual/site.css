@@ -162,28 +162,48 @@ html, body {
 	border-radius:5px;
 }
 
-
 #eventList{
 	float: left;
 	width: 40%; 
 	height: 90%; 
-	overflow-y: scroll;
 	border-right: 1px outset white;
 }
 
-#eventList::-webkit-scrollbar-track
+#EventTab{
+	height: 4%; 
+}
+#invitedTab{
+	float: left;
+	border: 2px outset red;
+	text-align: center;
+	width: 49%;
+}
+#publicTab{
+	float: right;
+	border: 2px outset red;
+	text-align: center;
+	width: 49%;
+}
+
+
+#publicEvents, #invitedEvents{ 
+	height: 95%; 
+	overflow-y: scroll;
+}
+
+#publicEvents::-webkit-scrollbar-track, #invitedEvents::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
-#eventList::-webkit-scrollbar
+#publicEvents::-webkit-scrollbar, #invitedEvents::-webkit-scrollbar
 {
 	width: 5px;
 	background-color: #F5F5F5;
 }
 
-#eventList::-webkit-scrollbar-thumb
+#publicEvents::-webkit-scrollbar-thumb, #invitedEvents::-webkit-scrollbar-thumb
 {
 	background-color: #F90;	
 	background-image: -webkit-linear-gradient(90deg,
@@ -198,7 +218,7 @@ html, body {
 
 .listEvents{
 	border: 2px outset grey;
-	height: 20%;
+	height: 21%;
 	cursor: pointer;
 }
 
@@ -443,7 +463,7 @@ html, body {
 	margin: 5%;
 }
 
-.eventInfo .FeventImage img{
+#eventInfo .FeventImage img{
 	z-index: -1;
 	opacity: 1;
 	position: absolute;

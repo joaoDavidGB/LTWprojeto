@@ -1,8 +1,9 @@
 $("document").ready(function(){
 	$( ".listEvents" ).click(function(e) {
-		
+
         //obtem a informação do evento clicado
-		var eventID = e.currentTarget.id;
+		var eventIDA = e.currentTarget.id;
+        eventID= eventIDA.substring(1, 4);
   		$.post(
         'events/getEventInfo.php',
         {
@@ -30,6 +31,7 @@ $("document").ready(function(){
             var type = data['type'];
             var people = data['people'];
             var numberPeople = data['Npeople'];
+            
 
             var go = data['attend'];
 
@@ -82,8 +84,8 @@ $("document").ready(function(){
             //alteração de informação genérica
             $( ".Ftitle" ).text( name);
             $( ".Fdate" ).text( date);
-            $( ".Ftime").text( timeH);
             $( ".Ftype").text(type);
+            $( ".Ftime").text( timeH);
             $( ".Flocation" ).text( local);
             $( ".Fdescription" ).text( description);
             $( ".FeventImage" ).html( "<img src=" + image + " alt=" + "eventImage"+" />");
@@ -322,8 +324,14 @@ $("document").ready(function(){
         }
     })
 
-    $("#closeUserDelete").click(function(){
-        $("#DeleteAcc").toggle();
+    $("#publicTab").click(function(){
+        $("#invitedEvents").hide();
+        $("#publicEvents").show();
+    })
+
+    $("#invitedTab").click(function(){
+        $("#publicEvents").hide();
+        $("#invitedEvents").show();
     })
 })
 

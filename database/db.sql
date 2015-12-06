@@ -47,3 +47,9 @@ CREATE TABLE AttendEvent(
  idEvent INTEGER REFERENCES Event(idEvent),
  PRIMARY KEY(idUser,idEvent)
 );
+
+CREATE TABLE Invite(
+ idUser INTEGER REFERENCES User(idUser),
+ idEvent INTEGER REFERENCES Event(idEvent),
+ PRIMARY KEY(idUser,idEvent)
+);
