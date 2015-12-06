@@ -166,7 +166,6 @@ html, body {
 	float: left;
 	width: 40%; 
 	height: 90%; 
-	border-right: 1px outset white;
 }
 
 #EventTab{
@@ -222,9 +221,10 @@ html, body {
 
 .listEvents{
 	border: 2px outset grey;
-	height: 21%;
+	height: 120px;
 	cursor: pointer;
 }
+
 
 .listEvents .title{
 	color: orange;
@@ -242,13 +242,13 @@ html, body {
 .eventResume{
 	margin: 1%;
 	float: right;
-	text-align: center;
+	text-align: right;
 }
 
 #eventList .eventImage img{
+	height:120px;
+	width:120px;
 	margin-left: 2%;
-	max-height: 120px;
-	max-width: 120px;
 }
 
 #eventInfo{
@@ -261,6 +261,7 @@ html, body {
 	overflow-y: scroll;
 	border-right: 1px outset white;
 }
+
 
 #eventInfo::-webkit-scrollbar-track
 {
@@ -287,6 +288,11 @@ html, body {
 											  transparent)
 }
 
+#eventInfo .Fhost .inviteP{
+	padding-top:2px;
+}
+
+
 #eventInfo .Fhost{
 	margin-top: 2%;
 	text-align: center;
@@ -294,6 +300,7 @@ html, body {
 
 .Fmypres {
 	width: 20%;
+	cursor:pointer;
 }
 
 .FstopF, .FgoingF {
@@ -439,27 +446,31 @@ html, body {
 	font-size: 72px;
 }
 
-#eventInfo .Fdate{
+#eventInfo .FdateTime{
+	opacity:0.7;
+	position:absolute;
+	top: 10%;
+    	right: 1%;
 	text-align: center;
 	font-style: italic;
+	font-variant: small-caps;
+	font-size: 15px;
 }
 
-#eventInfo .Ftime{
+#eventInfo .FTypeLocation{
 	text-align: center;
-	font-style: italic;
-}
-
-#eventInfo .Ftype{
-	text-align: center;
-	font-style: italic;
-}
-
-#eventInfo .Flocation{
-	text-align: center;
+	color:orange;
+	font-family:Helvetica;
+	font-size:30px;
 }
 
 #eventInfo .FprivateEvent{
-	text-align: center;
+	top:100px;
+	right:20%;
+	text-align:center;
+	color:red;
+	font-size:72px;
+	font-famaly:Impact;
 }
 
 

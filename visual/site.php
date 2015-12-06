@@ -144,10 +144,10 @@
 					 			echo '<div class="location">'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
 					 			if($privateEvent == 0){
-					 				echo 'Public';
+					 				echo 'Private';
 					 			}
 					 			else
-					 				echo 'Private';
+					 				echo 'Public';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -179,13 +179,13 @@
 					 			echo '<div class="date">'.$date.'<br></div>';
 					 			echo '<div class="time">'.$time.'<br></div>';
 					 			echo '<div class="type">'.$type.'<br></div>';
-					 			echo '<div class="location">'.$location.'<br></div>';
+					 			echo '<div class="location">Location:'.$location.'<br></div>';
 					 			echo '<div class="privateEvent">';
 					 			if($privateEvent == 0){
-					 				echo 'Public';
+					 				echo 'Private';
 					 			}
 					 			else
-					 				echo 'Private';
+					 				echo 'Public';
 					 			echo '<br></div>';	
 				 			echo '</div>';
 				 			echo '<div class="eventImage"><img src="'.$image.'" alt="eventImage"/></div>';
@@ -213,12 +213,10 @@
 
 				 		echo '<div class="EventsInfo"> ';
 				 				echo '<div class="Ftitle"> '.$name.'<br></div>';
-					 			echo '<div class="Fdate">'.$date.'<br></div>';
-					 			echo '<div class="Ftime">'.$time.'<br></div>';
-					 			echo '<div class="Ftype">'.$type.'<br></div>';
-					 			echo '<div class="Flocation">'.$location.'<br></div>';
+					 			echo '<div class="FdateTime">'.$date.'<p>'.$time.'<br></div>';
+					 			echo '<div class="FTypeLocation">Location:'.$location.' Event Type:'.$type.' <br></div>';
 								echo '<div class="FprivateEvent">';
-					 			if($privateEvent === 0){
+					 			if($privateEvent == 0){
 					 				echo 'Private';
 					 			}
 					 			else
@@ -270,7 +268,7 @@
 					 			echo '</div>';
 
 					 			echo '<div class="Fdescription">'.$description.'<br></div>';
-					 			echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
+					 			//echo '<div class="FeventImage"><img name="FFeventImage" src="'.$image.'" alt="eventImage"/></div>';
 
 
 								echo '<div id="Fcomments">';

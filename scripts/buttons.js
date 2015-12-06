@@ -105,6 +105,7 @@ $("document").ready(function(){
 
             $("#Fpeople").text(numberPeople + " people going.");
             $("#FlistPeople").hide();
+	    $("#closeList").hide();
             $("#FlistPeople").empty();
             $("#FlistPeople").append('<p id="listTitle">List of people</p>');
             for(var i = 0; i < numberPeople; i++){
