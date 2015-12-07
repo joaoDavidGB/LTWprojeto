@@ -27,7 +27,7 @@
   for($j = 0; $j < $maxCom; $j++){
     $lineCom = getLine($tableCom, $j);
     $comUser = getUsername($lineCom['idUser']);
-    array_push($line['ArrayCom'], $comUser['username'], $lineCom['commentary']);
+    array_push($line['ArrayCom'], $comUser['username'], $lineCom['commentary'], $lineCom['idComment']);
   }
 
   $line['type'] = getEventType($line['name']);

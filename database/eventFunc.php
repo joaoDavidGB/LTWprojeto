@@ -386,29 +386,12 @@ function addComment($name, $commentary){
 	return true;
 }
 
-function deleteComment($name, $idComment){
+function deleteComment($idComment){
+	global $db;
 
-	$stmt = $db->prepare('SELECT idEvent FROM Event WHERE name = :name');
-	$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-	$stmt->execute();
-	$idEvent = $stmt->fetch();
-	$idEvent = $idEvent['idEvent'];
-
-	if(!(count($result))===1){
-		return false;
-	}
-
-	$stmt = $db->prepare('SELECT idUser FROM User where username = :username');
-	$stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
-	$stmt->execute();
-	$idUser = $stmt->fetch();
-	$idUser = $idUser['idUser'];
-
-	$stmt = $db->prepare('DELETE FROM Comment WHERE idEvent = :idEvent AND idUser = :idUser AND idComment = :idComment');
-	$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-	$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
+	$stmt = $db->prepare('DELETE FROM Comment WHERE idComment = :idComment');
 	$stmt->bindParam(':idComment', $idComment, PDO::PARAM_INT);
-	$stmt->execute();
+	return $stmt->execute();
 }
 
 

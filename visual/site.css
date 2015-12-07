@@ -46,10 +46,6 @@ html, body {
 	border: 2px inset grey;
 }
 
-.attendName{
-cursor:pointer;
-}
-
 #user{
 	position: absolute;
 	display: inline-block;
@@ -409,7 +405,7 @@ cursor:pointer;
 	position: absolute;
 	top:24%;
 	left:79%;
-	display: none;
+	
 	z-index: 2;
 }
 
@@ -430,6 +426,10 @@ cursor:pointer;
 	background-color: orange;
 	color: black;
 	margin-bottom: 10px;
+}
+
+.attendName{
+cursor:pointer;
 }
 
 .deleteEvent{
@@ -529,7 +529,7 @@ cursor:pointer;
 	font-weight: bolder;
 }
 
-.deleteComment{
+.deleteC{
 	display: inline-block;
 	float: right;
 	color: red;

@@ -48,7 +48,7 @@
 			$events = getEventsFromUser($_SESSION['username']);
 			$Nevents = count($events);
 			echo '<div id="listEventsAttending">';
-			echo '<p id="listTitle">List of Events Attending</p>';
+			echo '<p id="listTitle">List of Events Attending:</p>';
 			include_once('database/eventFunc.php');
 			for($i = 0; $i < $Nevents ; $i++){
 				$event = $events[$i]['idEvent'];

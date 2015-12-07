@@ -117,11 +117,30 @@ $("document").ready(function(){
         }); 
     });
 
-     $( ".deleteComment").click(function(){
-        alert("cenas");
-        var id = ev.currentTarget.id;
-        alert(id);
-    })
+    $('#Fcomments').on('click', '.deleteC', function(ev) {
+        ev.preventDefault();
+        var id = this.id;
+        id = id.substring(7, 9);
+        $.post(
+            'events/deleteComment.php',
+            {
+                'id' : id
+            },
+            function(data){
+                if(data == 'fail'){
+                    alert('fail');
+                }
+                else if (data == 'success'){
+                    location.reload();
+                }
+                else{
+                    alert(data);
+                }
+            }).fail(function(error) {
+                        return false;
+        });   
+
+    });
 
 
     $( ".editEvent").click(function(){
@@ -384,14 +403,14 @@ $("document").ready(function(){
             var ComentaryArray = data['ArrayCom'];
             $(".FcomUser").remove();
             $(".FcomBody").remove();
-            $(".deleteComment").remove();
+            $(".deleteC").remove();
             //apenas mostra os comentarios se o utilizador for ao evento
             if (go){
                  $("#Fcomments").show();
-                for(var j = 0; j < maxCom; j++){
+                for(var j = 0; j < maxCom; j+=2){
                     $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
                     if(host == "Delete Event" || data['session'] == ComentaryArray[2*j]){
-                         $("#Fcomments").append('<div class="deleteComment" id="deleteComment'+j+'"  >delete</div>');
+                         $("#Fcomments").append('<div class="deleteC" id="deleteC'+ComentaryArray[2*j+2]+'">delete</div>');
                     }
                     $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
                 }

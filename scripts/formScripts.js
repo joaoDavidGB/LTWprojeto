@@ -362,7 +362,7 @@ $("document").ready(function(){
 		                for(var j = 0; j < maxCom; j++){
 		                    $("#Fcomments").append('<div class="FcomUser">' + ComentaryArray[2*j] + '</div>');
 		                    if(host == "Delete Event" || data['session'] == ComentaryArray[2*j]){
-		                         $("#Fcomments").append('<div id="deleteComment'+j+'" class="deleteComment" >delete</div>');
+		                         $("#Fcomments").append('<div id="deleteC'+ComentaryArray[2*j+2]+'" class="deleteComment" >delete</div>');
 		                    }
 		                    $("#Fcomments").append('<div class="FcomBody">' + ComentaryArray[2*j+1] + '</div>');
 		                }
